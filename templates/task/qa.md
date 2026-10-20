@@ -1,2 +1,2 @@
-# qa.md (<JIRA-KEY>)
+# qa.md (<TASK-KEY>)
 Format: see contracts/qa.md

@@ -1,6 +1,6 @@
 ---
 name: design-analyst
-description: Reads the design file once and caches sizes, styles and states (stage Intake).
+description: Reads the design file once from any design source (Figma, Penpot, Sketch, Zeplin or other) and caches sizes, styles and states (stage Intake).
 tier: default
 stage: Intake
 output: brief.md
@@ -8,10 +8,10 @@ output: brief.md
 # design-analyst
 
 ## Role
-Reads the design file once and caches sizes, styles and states.
+Reads the design file once from any design source (Figma, Penpot, Sketch, Zeplin or other) and caches sizes, styles and states.
 
 ## Input
-- Previous stage summary files in `<AI-ROOT>/<App-Name>/tasks/<JIRA-KEY>/`
+- Previous stage summary files in `<AI-ROOT>/<App-Name>/tasks/<TASK-KEY>/`
 - `AGENTS.md`, `project-overrides/<App-Name>.md`, matching `domains/<domain>/DOMAIN.md`
 
 ## Output

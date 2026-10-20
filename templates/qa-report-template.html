@@ -14,8 +14,8 @@
  "eyebrow": "APP · QA FINAL REPORT",
  "title": "EXAMPLE Sample screen rebuild",
  "titleAccent": "EXAMPLE 94% of elements within 2 dp",
- "intro": "EXAMPLE: Release APK tested on 5 devices against the EN Figma (390x844). Translations checked for all app languages.",
- "version": "EXAMPLE v1.0 · 16 October 2026 · <JIRA-KEY>",
+ "intro": "EXAMPLE: Release APK tested on 5 devices against the base-language design (390x844, from Figma, Penpot or any design tool). Translations checked for all app languages.",
+ "version": "EXAMPLE v1.0 · 16 October 2026 · <TASK-KEY>",
  "sections": {
   "overview": true,
   "summary": true,
@@ -33,11 +33,11 @@
   "signoff": true
  },
  "overview": {
-  "jiraKey": "EXAMPLE <JIRA-KEY>",
+  "taskKey": "EXAMPLE <TASK-KEY>",
   "build": "EXAMPLE 3.2.1 (321) release APK",
   "date": "EXAMPLE 16 Oct 2026",
-  "figmaFrame": "390x844 dp",
-  "figmaLink": "EXAMPLE EN Figma link"
+  "designFrame": "390x844 dp",
+  "designLink": "EXAMPLE design link (Figma, Penpot, Sketch, Zeplin or any)"
  },
  "scorecard": {
   "_formula": "Each card: score 0-100 = average of its inputs' sub-scores (each sub-score 100 if target met, 70 if within 20% of target, 40 otherwise). If score is null it is computed from inputs[].sub. Grade: A>=90, B>=80, C>=70, D>=60, E>=50, F<50. Status: pass>=80, warn 60-79, fail<60. Overall = weighted average using weights (sum 1.0).",
@@ -194,7 +194,7 @@
    "role": "Safety"
   },
   {
-   "name": "qa-figma",
+   "name": "qa-design",
    "id": "emulator",
    "size": "390x844 dp",
    "role": "Pixel check"
@@ -202,12 +202,12 @@
  ],
  "summary": {
   "verdict": "PASS",
-  "headline": "EXAMPLE From 14% to 94% of elements on their Figma position",
+  "headline": "EXAMPLE From 14% to 94% of elements on their design position",
   "text": "EXAMPLE: All flows pass on 5 devices. 2 minor offsets, no major.",
   "kpis": [
    {
     "value": "94%",
-    "label": "elements within 2 dp of Figma",
+    "label": "elements within 2 dp of the design",
     "hl": true
    },
    {
@@ -230,12 +230,12 @@
   ]
  },
  "pixel": {
-  "rule": "Within 2 dp = aligned, up to 6 dp = minor, beyond = major. Graded on qa-figma (390x844).",
+  "rule": "Within 2 dp = aligned, up to 6 dp = minor, beyond = major. Graded on qa-design (390x844).",
   "screens": [
    {
     "name": "EXAMPLE Item list",
     "group": "F1 · SAMPLE FEATURE",
-    "figmaImg": "",
+    "designImg": "",
     "appImg": "",
     "within2": "95%",
     "spacing": "97%",
@@ -282,7 +282,7 @@
    {
     "name": "EXAMPLE Item detail",
     "group": "F1 · SAMPLE FEATURE",
-    "figmaImg": "",
+    "designImg": "",
     "appImg": "",
     "within2": "88%",
     "spacing": "92%",
@@ -388,7 +388,7 @@
      "Emulator B": "PASS",
      "qa-small": "PASS",
      "qa-large": "PASS",
-     "qa-figma": "PASS"
+     "qa-design": "PASS"
     }
    },
    {
@@ -398,7 +398,7 @@
      "Emulator B": "PASS",
      "qa-small": "FAIL",
      "qa-large": "PASS",
-     "qa-figma": "PASS"
+     "qa-design": "PASS"
     }
    }
   ]
@@ -422,23 +422,23 @@
   ]
  },
  "errorflows": {
-  "note": "Each error scenario is forced on qa-figma (and checked on qa-small). Wrong PIN is tried only once per number.",
+  "note": "Each error scenario is forced on qa-design (and checked on qa-small). Wrong PIN is tried only once per number.",
   "items": [
    {
     "name": "API failure (500)",
     "how": "EXAMPLE Mock server returns 500",
     "expected": "Error banner with Retry, no crash, AppLog.event logged",
     "actual": "EXAMPLE As expected",
-    "figmaImg": "",
+    "designImg": "",
     "appImg": "",
     "status": "PASS"
    },
    {
     "name": "No internet",
-    "how": "EXAMPLE adb shell svc wifi/data disable",
+    "how": "EXAMPLE adb shell svc wifi/data disable (Android), airplane mode or Network Link Conditioner (iOS)",
     "expected": "Offline screen, cached data shown",
     "actual": "EXAMPLE As expected",
-    "figmaImg": "",
+    "designImg": "",
     "appImg": "",
     "status": "PASS"
    },
@@ -447,7 +447,7 @@
     "how": "EXAMPLE Throttle network, 30 s delay",
     "expected": "Timeout message, Retry works",
     "actual": "EXAMPLE Spinner shows 45 s before message",
-    "figmaImg": "",
+    "designImg": "",
     "appImg": "",
     "status": "FAIL"
    },
@@ -456,7 +456,7 @@
     "how": "EXAMPLE Enter letters in amount",
     "expected": "Inline validation text in all 4 languages",
     "actual": "EXAMPLE As expected",
-    "figmaImg": "",
+    "designImg": "",
     "appImg": "",
     "status": "PASS"
    },
@@ -465,7 +465,7 @@
     "how": "EXAMPLE Account with no items",
     "expected": "Empty illustration + localized text",
     "actual": "EXAMPLE As expected",
-    "figmaImg": "",
+    "designImg": "",
     "appImg": "",
     "status": "PASS"
    },
@@ -474,7 +474,7 @@
     "how": "EXAMPLE Expire token on server",
     "expected": "Redirect to login with message",
     "actual": "EXAMPLE As expected",
-    "figmaImg": "",
+    "designImg": "",
     "appImg": "",
     "status": "PASS"
    },
@@ -483,7 +483,7 @@
     "how": "EXAMPLE One wrong PIN entry",
     "expected": "Error text, attempts left shown, no lock",
     "actual": "EXAMPLE As expected",
-    "figmaImg": "",
+    "designImg": "",
     "appImg": "",
     "status": "PASS"
    }
@@ -495,14 +495,14 @@
     "id": "F-01",
     "severity": "Major",
     "screen": "EXAMPLE Item detail",
-    "issue": "Amount label 7 dp lower than Figma",
-    "device": "qa-figma",
+    "issue": "Amount label 7 dp lower than the design",
+    "device": "qa-design",
     "img": ""
    }
   ]
  },
  "performance": {
-  "_note": "Any device. Fill spec from adb (getprop, /proc/meminfo, df). verdict/status: pass | warn | fail.",
+  "_note": "Any device. Fill spec from adb on Android (getprop, /proc/meminfo, df), device settings or Xcode on iOS, or any device tool. verdict/status: pass | warn | fail.",
   "device": {
    "name": "qa-small",
    "model": "Android emulator (low-spec profile)",
@@ -607,7 +607,7 @@
     "verdict": "pass"
    },
    {
-    "device": "qa-figma",
+    "device": "qa-design",
     "score": 89,
     "coldStart": "1.5 s",
     "peakMem": "130 MB",
@@ -660,7 +660,7 @@
  },
  "video": {
   "src": "",
-  "caption": "EXAMPLE Success flow, screen-recorded on qa-figma"
+  "caption": "EXAMPLE Success flow, screen-recorded on qa-design"
  },
  "signoff": {
   "qa": "EXAMPLE QA Lead bot",
@@ -776,9 +776,9 @@ const cardScore=c=>c.score!=null?c.score:Math.round((c.inputs||[]).reduce((a,i)=
 const O=C.overview;const D=C.devices||[];
 const B={
 overview:()=>`<section>${head('Overview','Test setup')}
- ${kpis([{value:O.figmaFrame,label:'Figma frame (EN), exact grade device',hl:true},{value:D.length,label:'devices tested'},{value:O.build,label:"build",sm:1},{value:O.jiraKey,label:'Jira'}])}
+ ${kpis([{value:O.designFrame,label:'Design frame (base language), exact grade device',hl:true},{value:D.length,label:'devices tested'},{value:O.build,label:"build",sm:1},{value:O.taskKey,label:'Task'}])}
  ${tbl(['Device','ID','Size','Role'],D.map(d=>[`<b>${e(d.name)}</b>`,e(d.id),e(d.size),d.role==='Pixel check'?`<span class="ok">${e(d.role)}</span>`:e(d.role)]))}
- <div class="note">Figma: ${e(O.figmaLink)} · Date: ${e(O.date)}</div></section>`,
+ <div class="note">Design: ${e(O.designLink)} · Date: ${e(O.date)}</div></section>`,
 scorecard:()=>{const SC=C.scorecard;if(!SC)return '';const W=SC.weights||{};const cs=SC.cards.map(c=>({...c,s:cardScore(c)}));
  const ov=SC.overall||{};const tot=ov.score!=null?ov.score:Math.round(cs.reduce((a,c)=>a+c.s*(W[c.key]??1/cs.length),0));const v=ov.verdict||stat(tot);
  return `<section style="break-inside:avoid">${head('Executive scorecard','Release health at a glance')}
@@ -786,14 +786,14 @@ scorecard:()=>{const SC=C.scorecard;if(!SC)return '';const W=SC.weights||{};cons
  <div class="sc">${cs.map(c=>`<div class="scc" style="--c:${scol(c.s)}"><div class="g">${grade(c.s)}</div><div class="t">${e(c.title)}</div><div class="n">${c.s}<small>/100</small></div>${pill(stat(c.s))}<div class="nt">${e(c.note)}</div><ul>${(c.inputs||[]).map(i=>`<li><span>${e(i.name)}</span><b>${e(i.value)}</b></li>`).join('')}</ul></div>`).join('')}</div>
  <div class="note">Score = average of input sub-scores (100 met, 70 near, 40 missed). Grade A 90+, B 80+, C 70+, D 60+, E 50+, F below 50. Overall = weighted average.</div></section>`},
 summary:()=>`<section>${head('Result',C.summary.headline,' '+pill(C.summary.verdict))}<p class="lead">${e(C.summary.text)}</p>${kpis(C.summary.kpis)}</section>`,
-pixel:()=>`<section>${head('Alignment by screen','Measured against Figma')}<p class="lead">${e(C.pixel.rule)}</p>
+pixel:()=>`<section>${head('Alignment by screen','Measured against the design')}<p class="lead">${e(C.pixel.rule)}</p>
  ${tbl(['Screen','Measured','Within 2 dp','Spacing OK','Minor','Major','Screen shift','Grade'],C.pixel.screens.map(s=>[e(s.name),s.measured,`<span class="ok">${e(s.within2)}</span>`,`<span class="ok">${e(s.spacing)}</span>`,s.minor,s.major?`<span class="bad">${s.major}</span>`:0,e(s.shift),pill(s.grade)]))}</section>
- ${C.pixel.screens.map(s=>`<section style="break-inside:avoid">${head(s.group,s.name,' '+pill(s.grade))}<div class="cmp">${shot(s.figmaImg,'Figma (EN)','Figma')}${shot(s.appImg,'App with measured elements','App')}
+ ${C.pixel.screens.map(s=>`<section style="break-inside:avoid">${head(s.group,s.name,' '+pill(s.grade))}<div class="cmp">${shot(s.designImg,'Design (base language)','Design')}${shot(s.appImg,'App with measured elements','App')}
  <div class="side">${kpis([{value:s.within2,label:'within 2 dp'},{value:s.spacing,label:'spacing OK'},{value:s.shift,label:'screen shift'}])}
- <div>${s.measured} measured · ${s.major} major · ${s.minor} minor</div>${(()=>{const E=s.elements||[];if(!E.length&&s.measured==null)return '';const bad=E.filter(x=>x.grade==='minor'||x.grade==='major');const n=(s.measured??E.length)-bad.length;return `<h4>Element check</h4>${bad.length?`<table class="mini"><thead><tr><th>Element · property</th><th>Figma</th><th>App</th><th>Diff</th><th></th></tr></thead><tbody>${bad.map(x=>`<tr><td><b>${e(x.element)}</b> · ${e(x.property)}</td><td>${e(x.expected)}</td><td>${e(x.actual)}</td><td class="${x.grade==='major'?'bad':'warn'}">${e(x.diff)}</td><td>${pill(x.grade)}</td></tr>`).join('')}</tbody></table>`:''}<div class="okline2" style="font-size:9.5px;padding:6px 10px;margin-top:6px">&#10003; All remaining UI elements aligned (${n})</div>`})()}</div></div></section>`).join('')}`,
+ <div>${s.measured} measured · ${s.major} major · ${s.minor} minor</div>${(()=>{const E=s.elements||[];if(!E.length&&s.measured==null)return '';const bad=E.filter(x=>x.grade==='minor'||x.grade==='major');const n=(s.measured??E.length)-bad.length;return `<h4>Element check</h4>${bad.length?`<table class="mini"><thead><tr><th>Element · property</th><th>Design</th><th>App</th><th>Diff</th><th></th></tr></thead><tbody>${bad.map(x=>`<tr><td><b>${e(x.element)}</b> · ${e(x.property)}</td><td>${e(x.expected)}</td><td>${e(x.actual)}</td><td class="${x.grade==='major'?'bad':'warn'}">${e(x.diff)}</td><td>${pill(x.grade)}</td></tr>`).join('')}</tbody></table>`:''}<div class="okline2" style="font-size:9.5px;padding:6px 10px;margin-top:6px">&#10003; All remaining UI elements aligned (${n})</div>`})()}</div></div></section>`).join('')}`,
 translations:()=>{const T=C.translations,F=T.failed||[],keys=new Set(F.map(f=>f.key)),rest=(T.totalKeys||0)-keys.size;
- return `<section>${head('Localization','Translations vs Figma')}${kpis([{value:F.length,label:'failing key/language pairs',hl:true},{value:keys.size,label:'keys with issues'},{value:T.totalKeys,label:'keys checked'}])}
- ${F.length?tbl(['Key','Language','Expected (Figma)','Actual (app)','Issue'],F.map(f=>[`<b>${e(f.key)}</b>`,`<b>${e(f.lang)}</b>`,e(f.expected),`<span class="bad">${e(f.actual)}</span>`,pill(f.issue)])):''}
+ return `<section>${head('Localization','Translations vs design')}${kpis([{value:F.length,label:'failing key/language pairs',hl:true},{value:keys.size,label:'keys with issues'},{value:T.totalKeys,label:'keys checked'}])}
+ ${F.length?tbl(['Key','Language','Expected (design)','Actual (app)','Issue'],F.map(f=>[`<b>${e(f.key)}</b>`,`<b>${e(f.lang)}</b>`,e(f.expected),`<span class="bad">${e(f.actual)}</span>`,pill(f.issue)])):''}
  <div class="okline2">&#10003; All ${F.length?'remaining ':''}${rest} keys PASS in all languages</div></section>`},
 devices:()=>`<section>${head('Safety checks','Device matrix')}${tbl(['Check',...D.map(d=>d.name)],C.deviceMatrix.rows.map(r=>[e(r.check),...D.map(d=>r.results&&r.results[d.name]!=null?res(r.results[d.name]):'<span class="warn">N/A</span>')]))}</section>`,
 testcases:()=>`<section>${head('Functional','Test cases')}${tbl(['ID','Title','Steps','Expected','Result'],C.testcases.rows.map(r=>[`<b>${e(r.id)}</b>`,e(r.title),e(r.steps),e(r.expected),res(r.result)]))}</section>`,
@@ -803,7 +803,7 @@ errorflows:()=>{const it=C.errorflows.items;const p=it.filter(i=>i.status==='PAS
  ${tbl(['Scenario','Expected','Actual','Status'],it.map(i=>[`<b>${e(i.name)}</b>`,e(i.expected),e(i.actual),pill(i.status)]))}</section>
  <section>${it.map((i,n)=>`<div class="ef"><div><div class="sec-eyebrow">E${n+1} · Error flow</div><h3>${e(i.name)} ${pill(i.status)}</h3>
  <dl><dt>How</dt><dd>${e(i.how)}</dd><dt>Expected</dt><dd>${e(i.expected)}</dd><dt>Actual</dt><dd class="${i.status==='PASS'?'':'bad'}">${e(i.actual)}</dd></dl></div>
- ${shot(i.figmaImg,'Figma error state','Figma')}${shot(i.appImg,'App error state','App')}</div>`).join('')}</section>`},
+ ${shot(i.designImg,'Design error state','Design')}${shot(i.appImg,'App error state','App')}</div>`).join('')}</section>`},
 failures:()=>`<section>${head('Defects','Failures')}${tbl(['ID','Severity','Screen','Issue','Device'],C.failures.rows.map(r=>[`<b>${e(r.id)}</b>`,pill(r.severity),e(r.screen),e(r.issue),e(r.device)]))}</section>`,
 uiperf:()=>{const U=C.uiPerf;if(!U)return '';const R=U.rows||[];const T=U.thresholds||{};const scr=new Set(R.map(r=>r.screen));const rest=(U.totalScreens||0)-scr.size;const hasImg=R.some(r=>r.imageCacheHit);
  return `<section>${head('UI performance','UI performance by screen')}<p class="lead">Targets: FPS ${'>='} ${e(T.fps)}, janky frames ${'<='} ${e(T.jankyPct)}%, first render ${'<='} ${e(T.firstRenderMs)} ms, rebuilds within budget. Only failing or warning screen x device rows are listed.</p>
@@ -828,10 +828,10 @@ const NAMES={overview:'Overview',scorecard:'Scorecard',uiperf:'UI performance',s
 function render(){
  document.getElementById('root').innerHTML=`<div class="cover"><div class="logo">APP<small>logo</small></div>
  <div class="eyebrow">${e(C.eyebrow)}</div><h1>${e(C.title)}<span>${e(C.titleAccent)}</span></h1><p class="intro">${e(C.intro)}</p>
- <div class="devs"><div>Figma <b>${e(O.figmaFrame)}</b></div>${D.map(d=>`<div>${e(d.name)} <b>${e(d.size)}</b></div>`).join('')}</div>
+ <div class="devs"><div>Design <b>${e(O.designFrame)}</b></div>${D.map(d=>`<div>${e(d.name)} <b>${e(d.size)}</b></div>`).join('')}</div>
  <div class="meta">${e(C.version)}</div></div>
  <main>${Object.keys(B).filter(k=>S[k]).map(k=>B[k]()).join('')}</main>
- <div class="foot"><span>QA Report · ${e(C.app)}</span><span>${e(O.jiraKey)}</span></div>`;}
+ <div class="foot"><span>QA Report · ${e(C.app)}</span><span>${e(O.taskKey)}</span></div>`;}
 document.getElementById('toggles').innerHTML=Object.keys(B).map(k=>`<label><input type="checkbox" data-k="${k}" ${S[k]?'checked':''}> ${NAMES[k]}</label>`).join(' ');
 document.querySelectorAll('#toggles input').forEach(i=>i.onchange=()=>{S[i.dataset.k]=i.checked;localStorage.setItem(KEY,JSON.stringify(S));render();});
 render();

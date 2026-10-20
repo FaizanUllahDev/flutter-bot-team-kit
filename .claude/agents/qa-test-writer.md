@@ -9,7 +9,7 @@ model: inherit
 Writes unit/widget tests for each scenario; aims for 80%+ diff coverage.
 
 ## Input
-- Previous stage summary files in `<AI-ROOT>/<App-Name>/tasks/<JIRA-KEY>/`
+- Previous stage summary files in `<AI-ROOT>/<App-Name>/tasks/<TASK-KEY>/`
 - `AGENTS.md`, `project-overrides/<App-Name>.md`, matching `domains/<domain>/DOMAIN.md`
 
 ## Output

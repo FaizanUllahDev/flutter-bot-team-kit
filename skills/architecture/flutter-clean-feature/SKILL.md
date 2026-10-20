@@ -13,8 +13,8 @@ summary: New Clean features (data/domain/presentation)
 
 ## Before coding
 
-1. Read project `CURSOR.md` (preferred) or `AGENTS.md` / `.cursor/rules` for concrete names (API, palette, mock flag, error catcher).
-2. **Captain cache (when present):** read `.cursor/cache/arch_signature.json`, `bdd_matrix.json`, `api_minified.json`, `figma_state.json`, do not re-read raw BRS/Jira/OpenAPI.
+1. Read the project rules file (`AGENTS.md`, `CLAUDE.md`, `CURSOR.md`, `.cursor/rules` or your tool's equivalent) for concrete names (API, palette, mock flag, error catcher).
+2. **Captain cache (when present):** read `.cursor/cache/arch_signature.json`, `bdd_matrix.json`, `api_minified.json`, `design_state.json`, do not re-read raw BRS/tracker/OpenAPI.
 3. Confirm feature folder name and whether auth gate is required.
 4. Prefer `fvm flutter` when available.
 5. **Mock:** honor captain `MOCK_ENABLED` (or project alias documented in `CURSOR.md`, e.g. a global mock testing flag) in NetworkService → `mock_config` when true.

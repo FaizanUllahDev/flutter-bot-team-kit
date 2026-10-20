@@ -1,2 +1,2 @@
-# gap.md (<JIRA-KEY>)
+# gap.md (<TASK-KEY>)
 Format: see contracts/gap.md

@@ -8,7 +8,7 @@ summary: Creates the bot team
 ---
 # Team Builder
 
-Builds a tracker-driven mobile dev team for <APP_NAME>. Read saved setup memories first (<APP_NAME>, <STACK>, <TRACKER>, <DOCS_TOOL>, <DESIGN_FILE>, <CRASH_TOOLS>, <CACHE_ROOT>, <CHAT_LANGUAGE>, skipped bots). If any are missing, run getting-started first.
+Builds a tracker-driven mobile dev team for <APP_NAME>. Read saved setup memories first (<APP_NAME>, <STACK>, <TRACKER>, <DOCS_TOOL>, <DESIGN_FILE>, <CRASH_TOOLS>, <QUALITY_TOOL>, <CACHE_ROOT>, <CHAT_LANGUAGE>, skipped bots). If any are missing, run getting-started first.
 
 ## Bots
 
@@ -22,8 +22,8 @@ Builds a tracker-driven mobile dev team for <APP_NAME>. Read saved setup memorie
 | Docs Analyst | BRS and Docs Analyst | Reads business docs in <DOCS_TOOL>. | Extracts rules, flows, API contracts into the cache. | Re-reads raw docs once cached; edits docs. |
 | Design Analyst | Design Analyst | Reads <DESIGN_FILE> once. | Captures screens, tokens, states, assets into cache. | Repeated design calls; guesses missing frames. |
 | Code Analyst | Codebase and Reuse Analyst | Knows the repo. | Maps architecture, reusable widgets, affected files. | Changes code. |
-| Firebase Analyst | Firebase Analyst (optional) | Checks Crashlytics, Analytics, Remote Config. | Reports crashes and configs tied to the task. | Changes Firebase settings or deploys. |
-| Sentry Analyst | Sentry Analyst (optional) | Checks errors and traces. | Links issues and stack traces to the task. | Resolves or mutes issues. |
+| Analytics Analyst | Analytics and Config Analyst (optional) | Checks analytics and remote config (Firebase Analytics, Remote Config, Amplitude, Mixpanel or any). | Reports events and configs tied to the task. | Changes analytics or config settings, or deploys. |
+| Crash Analyst | Crash Analyst (optional) | Checks crashes, errors and traces in <CRASH_TOOLS> (Sentry, Firebase Crashlytics or any). | Links issues and stack traces to the task. | Resolves or mutes issues. |
 | Gap Finder | Requirements Gap Finder | Compares all intake outputs, and checks them against the code. | Lists gaps, conflicts and open questions with severity. | Fills gaps by assumption. |
 | Dev Planner | Dev Planner | Turns findings into a build plan. | Steps, files, risks, estimates per dev. | Starts coding. |
 | Tracker Drafter | Task Drafter | Drafts subtasks in <TRACKER>. | Short, specific dev subtasks (UI, API, Logic, Tests). | Creates or posts without owner approval. |

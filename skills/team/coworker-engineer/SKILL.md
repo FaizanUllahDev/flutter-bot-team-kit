@@ -17,7 +17,7 @@ Own outcomes: requirements → code → cases → review → memory. Not dumb au
 ## Token budget
 
 - Read **only** `.cursor/memory/PROJECT_CONTEXT.md` for long-term project brain.
-- For active `@captain` runs: prefer `.cursor/cache/*.json` over re-reading BRS/Jira/Swagger; still patch `PROJECT_CONTEXT` with decisions only.
+- For active `@captain` runs: prefer `.cursor/cache/*.json` over re-reading BRS/tracker/Swagger; still patch `PROJECT_CONTEXT` with decisions only.
 - Do **not** open full playbooks unless scaffolding or a pin is missing.
 - Graph → Grep → partial Read. No whole-file dumps. No checklist in chat.
 - Memory updates = small patches, not full rewrites.

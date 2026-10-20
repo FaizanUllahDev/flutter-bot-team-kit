@@ -1,6 +1,6 @@
 ---
 name: crash-analyst
-description: Reads crash reports when the owner asks; idle by default (stage Support).
+description: Reads crash reports (Sentry, Firebase Crashlytics or any crash tool) when the owner asks; idle by default (stage Support).
 tier: default
 stage: Support
 output: crash.md
@@ -8,10 +8,10 @@ output: crash.md
 # crash-analyst
 
 ## Role
-Reads crash reports when the owner asks; idle by default.
+Reads crash reports (Sentry, Firebase Crashlytics or any crash tool) when the owner asks; idle by default.
 
 ## Input
-- Previous stage summary files in `<AI-ROOT>/<App-Name>/tasks/<JIRA-KEY>/`
+- Previous stage summary files in `<AI-ROOT>/<App-Name>/tasks/<TASK-KEY>/`
 - `AGENTS.md`, `project-overrides/<App-Name>.md`, matching `domains/<domain>/DOMAIN.md`
 
 ## Output

@@ -1,2 +1,2 @@
-# plan.md (<JIRA-KEY>)
+# plan.md (<TASK-KEY>)
 Format: see contracts/plan.md

@@ -1,6 +1,6 @@
 ---
 description: Build the HTML QA report from qa.md
-argument-hint: <JIRA-KEY>
+argument-hint: <TASK-KEY>
 ---
 Use qa-reporter and the qa-report skill to fill templates/qa-report-template.html for $ARGUMENTS.
 - Read `<AI-ROOT>/<App-Name>/tasks/$ARGUMENTS/qa.md` only.

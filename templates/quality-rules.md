@@ -1,4 +1,5 @@
-# Local Codacy-style rules
+# Local code quality rules
+Same thresholds whether your team uses Codacy, SonarQube, DeepSource, another tool or none.
 | Rule | OK | Fail |
 |---|---|---|
 | Cyclomatic complexity | <= 8 | > 15 |

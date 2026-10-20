@@ -20,7 +20,7 @@ No GetX controller inside the widget. Same widget powers flow A, flow B, flow C,
 
 ## Silent Redesign (captain)
 
-If Figma introduces a **new style for an existing common widget** already in the codebase, do **not** silently fork a second common implementation. Escalate to `gap-matrix-engine` / captain Silent Redesign user gate first.
+If the design (Figma or any design tool) introduces a **new style for an existing common widget** already in the codebase, do **not** silently fork a second common implementation. Escalate to `gap-matrix-engine` / captain Silent Redesign user gate first.
 
 ## Decision: common vs feature widget
 

@@ -1,2 +1,2 @@
-# brief.md (<JIRA-KEY>)
+# brief.md (<TASK-KEY>)
 Format: see contracts/brief.md

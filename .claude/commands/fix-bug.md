@@ -1,6 +1,6 @@
 ---
 description: Triage and fix a bug with a proving test
-argument-hint: <JIRA-KEY or description>
+argument-hint: <TASK-KEY or description>
 ---
 Fix this bug: $ARGUMENTS
 

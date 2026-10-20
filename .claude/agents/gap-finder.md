@@ -5,13 +5,13 @@ model: opus
 ---
 # gap-finder
 
-> Tier strong: adapters map this to a strong model (Claude: opus, Cursor: your chosen model).
+> Tier strong: adapters map this to a strong model (for example Claude Code: opus, Cursor: your chosen model, Codex: high reasoning, Antigravity: pro).
 
 ## Role
 Compares requirements, design and code; lists gaps and conflicts.
 
 ## Input
-- Previous stage summary files in `<AI-ROOT>/<App-Name>/tasks/<JIRA-KEY>/`
+- Previous stage summary files in `<AI-ROOT>/<App-Name>/tasks/<TASK-KEY>/`
 - `AGENTS.md`, `project-overrides/<App-Name>.md`, matching `domains/<domain>/DOMAIN.md`
 
 ## Output

@@ -1,6 +1,6 @@
 ---
 name: tracker-analyst
-description: Reads the ticket, comments, attachments and links (stage Intake).
+description: Reads the ticket, comments, attachments and links from any tracker (Jira, Linear, ClickUp, GitHub Issues, Azure DevOps, Asana or other) (stage Intake).
 tier: default
 stage: Intake
 output: brief.md
@@ -8,10 +8,10 @@ output: brief.md
 # tracker-analyst
 
 ## Role
-Reads the ticket, comments, attachments and links.
+Reads the ticket, comments, attachments and links from any tracker (Jira, Linear, ClickUp, GitHub Issues, Azure DevOps, Asana or other).
 
 ## Input
-- Previous stage summary files in `<AI-ROOT>/<App-Name>/tasks/<JIRA-KEY>/`
+- Previous stage summary files in `<AI-ROOT>/<App-Name>/tasks/<TASK-KEY>/`
 - `AGENTS.md`, `project-overrides/<App-Name>.md`, matching `domains/<domain>/DOMAIN.md`
 
 ## Output

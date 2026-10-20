@@ -100,10 +100,10 @@ svg{width:100%;height:auto;display:block}
 </div>
 
 <div class="rules">
- <div class="rule"><b>✋ Humans own the decisions</b><span>Bots stop at six gates: open questions, plan and ticket drafts, repo state, review fixes, QA verdict and posting to Jira.</span></div>
+ <div class="rule"><b>✋ Humans own the decisions</b><span>Bots stop at six gates: open questions, plan and ticket drafts, repo state, review fixes, QA verdict and posting to the tracker.</span></div>
  <div class="rule"><b>🔒 No bot commits or pushes</b><span>The owner does all git work. Git Bot only advises on branches, conflicts and how to group files per task.</span></div>
- <div class="rule"><b>⚡ Read once, reuse everywhere</b><span>Analysts read Jira, BRS, Figma and code once and write summaries to the shared cache. Every later bot reads the cache.</span></div>
- <div class="rule"><b>📣 Nothing external without a yes</b><span>Jira tickets, comments and status changes are drafted first and only posted after the owner approves.</span></div>
+ <div class="rule"><b>⚡ Read once, reuse everywhere</b><span>Analysts read the tracker, BRS, design and code once and write summaries to the shared cache. Every later bot reads the cache.</span></div>
+ <div class="rule"><b>📣 Nothing external without a yes</b><span>Tracker tickets, comments and status changes are drafted first and only posted after the owner approves.</span></div>
 </div>
 <style>
 .ref{margin-top:40px}
@@ -143,17 +143,17 @@ code{font:500 13px var(--mono);background:#0F1729;border:1px solid #1E293B;borde
 <h2 class="s"><small>Handoff chain</small>Who does what, then what happens next</h2>
 <div class="tw"><table class="t">
 <tr><th>#</th><th>Agent</th><th>Does</th><th>Writes</th><th>Next</th></tr>
-<tr><td>1</td><td>Captain</td><td>Reads the input (Jira key, BRS, Figma, request) and classifies it</td><td>Task folder</td><td>A "?" gets an answer only. Otherwise Intake starts</td></tr>
-<tr><td>2</td><td>Intake analysts</td><td>BRS, Jira, Figma and Code read once, in parallel</td><td>brief, jira, figma, code .md</td><td>The owner approves, then Gap Finder starts</td></tr>
+<tr><td>1</td><td>Captain</td><td>Reads the input (task key, BRS, design, request) and classifies it</td><td>Task folder</td><td>A "?" gets an answer only. Otherwise Intake starts</td></tr>
+<tr><td>2</td><td>Intake analysts</td><td>BRS, tracker, design and code read once, in parallel</td><td>brief, tracker, design, code .md</td><td>The owner approves, then Gap Finder starts</td></tr>
 <tr><td>3</td><td>Gap Finder</td><td>Finds gaps and blocker questions</td><td>gap.md</td><td>The owner answers, then Dev Planner starts</td></tr>
-<tr><td>4</td><td>Dev Planner + Jira Drafter</td><td>Plan, test cases and ticket drafts</td><td>plan.md, jira.md</td><td>The owner approves, or answers go back to the planner</td></tr>
+<tr><td>4</td><td>Dev Planner + Task Drafter</td><td>Plan, test cases and ticket drafts</td><td>plan.md, tracker.md</td><td>The owner approves, or answers go back to the planner</td></tr>
 <tr><td>5</td><td>Git Bot</td><td>Repo-ready check (advice only)</td><td>Note</td><td>The owner readies the branch, then devs start</td></tr>
 <tr><td>6</td><td>Flutter Devs + QA Test Writer</td><td>Code plus tests, and QA cases</td><td>Code, qa.md cases</td><td>Analyzer gate</td></tr>
 <tr><td>7</td><td>Analyzer gate</td><td><code>fvm flutter analyze</code> and related tests</td><td>Result</td><td>Pass goes to Review. Fail goes back to devs</td></tr>
-<tr><td>8</td><td>Review bots</td><td>PR Reviewer, Codacy, Security and Localization, in parallel</td><td>review.md, codacy.md</td><td>The owner picks fixes. Comments go back to devs (loop to 6)</td></tr>
-<tr><td>9</td><td>QA Lead + testers</td><td>EN and country tests on devices</td><td>qa/ evidence</td><td>Fail means rework (loop to 6). Pass goes to the report</td></tr>
+<tr><td>8</td><td>Review bots</td><td>PR Reviewer, Code Quality, Security and Localization, in parallel</td><td>review.md, quality.md</td><td>The owner picks fixes. Comments go back to devs (loop to 6)</td></tr>
+<tr><td>9</td><td>QA Lead + testers</td><td>Multi-language tests on devices</td><td>qa/ evidence</td><td>Fail means rework (loop to 6). Pass goes to the report</td></tr>
 <tr><td>10</td><td>QA Reporter</td><td>Fills the report template (HTML or PDF)</td><td>Final report</td><td>The owner accepts the verdict</td></tr>
-<tr><td>11</td><td>Jira Updater</td><td>Posts the comment and status</td><td>Jira</td><td>The owner says yes, then Jira Done</td></tr>
+<tr><td>11</td><td>Tracker Updater</td><td>Posts the comment and status</td><td>Tracker</td><td>The owner says yes, then tracker Done</td></tr>
 <tr><td>12</td><td>Cache Keeper</td><td>Saves repeat issues and syncs rules</td><td>rules, must-haves</td><td>Next task starts smarter</td></tr>
 </table></div>
 
@@ -163,10 +163,10 @@ code{font:500 13px var(--mono);background:#0F1729;border:1px solid #1E293B;borde
  <li>Chat teammates with their own memory, in group chats</li>
  <li>Run on the owner's command, and Captain orchestrates</li>
  <li>Skills: the shared library (<code>flutter-captain</code>, <code>flutter-clean-feature</code>, <code>flutter-legacy-edit</code>, <code>flutter-responsive-ui</code>, <code>flutter-reusable-widget</code>, <code>flutter-feature-review</code>, <code>&lt;money-feature-module&gt;</code>, <code>coworker-engineer</code>)</li>
- <li>Store: bot memory (preferences, rules summary) and task files in <code>&lt;AI-ROOT&gt;/&lt;App-Name&gt;/tasks/&lt;JIRA-KEY&gt;/</code></li></ul></div>
+ <li>Store: bot memory (preferences, rules summary) and task files in <code>&lt;AI-ROOT&gt;/&lt;App-Name&gt;/tasks/&lt;TASK-KEY&gt;/</code></li></ul></div>
  <div class="card"><h3>🖱️ Cursor sub-agents</h3><ul>
  <li>Files: <code>&lt;HOME&gt;/.cursor/agents/&lt;prefix&gt;-*.md</code></li>
- <li>Started with <code>/&lt;prefix&gt;-captain &lt;JIRA-KEY&gt;</code> inside Cursor on the repo</li>
+ <li>Started with <code>/&lt;prefix&gt;-captain &lt;TASK-KEY&gt;</code> inside Cursor on the repo</li>
  <li>Skills: the same skills, copied to <code>&lt;HOME&gt;/.cursor/skills</code> and <code>&lt;REPO&gt;/.cursor/skills</code></li>
  <li>Rules: <code>&lt;REPO&gt;/.cursor/rules/*.mdc</code></li>
  <li>Store: the same task files</li></ul></div>
@@ -181,12 +181,12 @@ code{font:500 13px var(--mono);background:#0F1729;border:1px solid #1E293B;borde
 <tr><td><code>PROJECT_CONTEXT.md</code></td><td>App overview</td><td>Read once</td></tr>
 <tr><td><code>project/rules.md</code></td><td>Team rules</td><td>Single source</td></tr>
 <tr><td><code>project/MEMORY.md</code></td><td>Dated decisions</td><td>No repeat discussions</td></tr>
-<tr><td><code>project/codacy-rules.md</code></td><td>Codacy-style rules</td><td>Local quality gate</td></tr>
+<tr><td><code>project/quality-rules.md</code></td><td>Code quality rules</td><td>Local quality gate</td></tr>
 <tr><td><code>project/quality-must-haves.md</code></td><td>Pre-dev checklist</td><td>Right on the first pass</td></tr>
 <tr><td><code>project/devices.md</code></td><td>QA devices</td><td>Same devices every run</td></tr>
 <tr><td><code>project/app-internals.md</code></td><td>App internals</td><td>No re-deriving</td></tr>
 <tr><td><code>project/test-accounts.md</code></td><td>Test logins</td><td>Local only, never shared</td></tr>
-<tr><td><code>tasks/&lt;KEY&gt;/</code> brief, gap, plan, codacy, review, qa .md</td><td>Stage summaries</td><td>Each stage reads a short file to save tokens</td></tr>
+<tr><td><code>tasks/&lt;KEY&gt;/</code> brief, gap, plan, quality, review, qa .md</td><td>Stage summaries</td><td>Each stage reads a short file to save tokens</td></tr>
 <tr><td><code>qa/</code></td><td>Screenshots, videos, reports</td><td>QA evidence</td></tr>
 <tr><td><code>_shared/qa-kit/</code></td><td>Tools, report template</td><td>Reused by every app</td></tr>
 </table></div>
@@ -199,7 +199,7 @@ code{font:500 13px var(--mono);background:#0F1729;border:1px solid #1E293B;borde
  <li>QA error flows: timeout mid-payment, insufficient balance, one wrong PIN</li>
  <li>Test accounts local only</li>
  <li>Skill: <code>&lt;money-feature-module&gt;</code></li>
- <li>Stricter Codacy critical issues</li>
+ <li>Stricter code quality critical issues</li>
  <li>A failed API in the success flow is a blocker</li></ul></div>
  <div class="card"><h3>📶 Telco</h3><p class="k">Plans, bundles, balance, profile, remote config</p><ul>
  <li>Focus on backend config and remote config data</li>
@@ -209,16 +209,16 @@ code{font:500 13px var(--mono);background:#0F1729;border:1px solid #1E293B;borde
  <li>Analytics events</li>
  <li>Offline and empty states</li></ul></div>
 </div>
-<p class="l" style="margin-top:10px">Shared by both: approval gates, fvm only, light TDD, Codacy grade B+ with 80% coverage on changed code, pixel QA against Figma, and git done only by the owner.</p>
+<p class="l" style="margin-top:10px">Shared by both: approval gates, fvm only, light TDD, code quality grade B+ with 80% coverage on changed code, pixel QA against the design, and git done only by the owner.</p>
 
 <div class="card" style="margin-top:26px;max-width:620px"><h3>📁 Save paths</h3><ul>
 <li><code>&lt;AI-ROOT&gt;/&lt;App-Name&gt;/PROJECT_CONTEXT.md</code></li>
 <li><code>&lt;AI-ROOT&gt;/&lt;App-Name&gt;/project/</code> rules.md, MEMORY.md, test accounts (local only)</li>
-<li><code>&lt;AI-ROOT&gt;/&lt;App-Name&gt;/tasks/&lt;JIRA-KEY&gt;/</code> stage .md files</li>
+<li><code>&lt;AI-ROOT&gt;/&lt;App-Name&gt;/tasks/&lt;TASK-KEY&gt;/</code> stage .md files</li>
 <li><code>&lt;AI-ROOT&gt;/_shared/qa-kit/report-template/</code></li>
 <li><code>&lt;REPO&gt;/.cursor/</code> and <code>~/.cursor/agents</code></li></ul></div>
 </div>
-<p class="src">Based on the team's own playbooks (team-builder skill and pipeline docs). Optional bots such as the Sentry, Firebase and Localization checks can be switched off per project. This page shows how work flows. It contains no performance figures.</p>
+<p class="src">Based on the team's own playbooks (team-builder skill and pipeline docs). Optional bots such as the Crash, Analytics and Localization checks can be switched off per project. This page shows how work flows. It contains no performance figures.</p>
 </div>
 
 <script>
@@ -232,7 +232,7 @@ const N=[
   never:'Stores secrets or lets bots write outside the cache layout.'},
  {id:'captain',name:'Captain',title:'Team Lead and Orchestrator',g:'hq',x:415,y:70,w:160,p:'fb',
   role:'The only entry point. Reads the request, classifies it as feature, bug or small fix, assigns each stage and enforces every gate. Has the final say.',
-  in:['Jira ticket, BRS link, Figma link, bug report or plain request','Team rules and project setup'],
+  in:['Tracker ticket (Jira, Linear, ClickUp or any), BRS link, design link (Figma, Penpot or any), bug report or plain request','Team rules and project setup'],
   out:['Route (feature, bug or fix) and stage assignments','Status updates to the owner: stage, owner, blockers'],
   when:'First, on every request. Stays in charge until the task is closed.',
   never:'Writes code itself, commits or pushes.'},
@@ -249,21 +249,21 @@ const N=[
   when:'On demand, mainly at the repo state check before build and at the end when the owner commits.',
   never:'Runs git, commits, pushes or rewrites history.'},
 
- {id:'jira',name:'Jira Analyst',title:'Requirements Analyst',g:'intake',x:140,y:215,w:134,p:'fb',
+ {id:'tracker',name:'Tracker Analyst',title:'Requirements Analyst',g:'intake',x:140,y:215,w:134,p:'fb',
   role:'Reads the ticket fully: description, every comment, attachments and linked issues, then writes distilled requirements to the cache.',
-  in:['Jira ticket, comments, sub-tasks, attachments, links'],
+  in:['Tracker ticket (Jira, Linear, ClickUp, GitHub Issues, Azure DevOps, Asana or any): comments, sub-tasks, attachments, links'],
   out:['Ticket summary with acceptance criteria','Latest decisions from comments','Unclear points for Gap Finder'],
   when:'Intake stage, in parallel with the other analysts. Runs on both feature and bug work.',
   never:'Skims, invents missing information or edits tickets.'},
  {id:'brs',name:'BRS Analyst',title:'BRS and Docs Analyst',g:'intake',x:284,y:215,w:134,p:'f',
   role:'Reads the business requirement documents and extracts rules, flows and API contracts into the cache.',
-  in:['BRS / Confluence pages linked to the task'],
+  in:['BRS / docs pages linked to the task (Confluence, Notion, Google Docs or any)'],
   out:['Flows, business rules, validations, error messages','Acceptance criteria and open points'],
   when:'Intake stage on feature work, in parallel with the other analysts.',
   never:'Re-reads raw docs once cached or edits the docs.'},
- {id:'figma',name:'Figma Analyst',title:'Design Analyst',g:'intake',x:428,y:215,w:134,p:'f',
+ {id:'design',name:'Design Analyst',title:'Design Analyst',g:'intake',x:428,y:215,w:134,p:'f',
   role:'Reads the design file once and captures screens, tokens, states and assets into the cache.',
-  in:['Figma frames linked to the task'],
+  in:['Design frames linked to the task (Figma, Penpot, Sketch, Zeplin or any)'],
   out:['Per-screen design summary: layout, components, states','Exported frames for QA visual comparison'],
   when:'Intake stage on feature work, in parallel with the other analysts.',
   never:'Makes repeated design calls or guesses missing frames.'},
@@ -273,18 +273,18 @@ const N=[
   out:['Architecture signature','Reuse map: reuse as is, extend or new','Risk list and files likely to change'],
   when:'Intake stage on both paths. Also sits in the Review group.',
   never:'Changes code.'},
- {id:'sentry',name:'Sentry Analyst',title:'Sentry Analyst (optional)',g:'intake',x:716,y:215,w:134,p:'b',
+ {id:'crash',name:'Crash Analyst',title:'Crash Analyst (optional)',g:'intake',x:716,y:215,w:134,p:'b',
   role:'Checks errors and traces and links the relevant issues and stack traces to the task.',
-  in:['Sentry issues, events and traces for the affected area'],
+  in:['Crash issues, events and traces for the affected area (Sentry, Firebase Crashlytics or any)'],
   out:['Linked issues and stack traces in the cache'],
   when:'Intake stage on bug work. Optional per project.',
   never:'Resolves or mutes issues.'},
- {id:'firebase',name:'Firebase Analyst',title:'Firebase Analyst (optional)',g:'intake',x:860,y:215,w:134,p:'b',
-  role:'Checks Crashlytics, Analytics and Remote Config and reports the crashes and configs tied to the task.',
-  in:['Crashlytics, Analytics, Remote Config'],
+ {id:'analytics',name:'Analytics Analyst',title:'Analytics and Config Analyst (optional)',g:'intake',x:860,y:215,w:134,p:'b',
+  role:'Checks analytics and remote config (Firebase Analytics, Remote Config, Amplitude, Mixpanel or any) and reports the events and configs tied to the task.',
+  in:['Analytics events, remote config flags'],
   out:['Crash and config findings in the cache'],
   when:'Intake stage on bug work. Optional per project.',
-  never:'Changes Firebase settings or deploys.'},
+  never:'Changes analytics or config settings, or deploys.'},
 
  {id:'gap',name:'Gap Finder',title:'Requirements Gap Finder (heavy model)',g:'plan',x:500,y:345,w:170,p:'fb',
   role:'Compares all intake summaries with each other and with the code. Lists gaps, conflicts and open questions with severity. On bugs, confirms the root cause before any plan.',
@@ -301,15 +301,15 @@ const N=[
   out:['Build plan with tasks per dev','Edge cases and test plan hand-off for QA Test Writer'],
   when:'After gate 1, on both paths.',
   never:'Starts coding or plans a refactor nobody asked for.'},
- {id:'drafter',name:'Jira Drafter',title:'Task Drafter',g:'plan',x:620,y:540,w:160,p:'f',
-  role:'Drafts short, specific dev subtasks in Jira (UI, API, Logic, Tests) in parallel with the Dev Planner.',
+ {id:'drafter',name:'Task Drafter',title:'Task Drafter',g:'plan',x:620,y:540,w:160,p:'f',
+  role:'Drafts short, specific dev subtasks for your tracker (UI, API, Logic, Tests) in parallel with the Dev Planner.',
   in:['Gap list and build plan'],
   out:['Draft subtasks, held until the owner chooses: create, keep as draft or skip'],
   when:'Planning stage on feature work, in parallel with the Dev Planner.',
   never:'Creates or posts anything without owner approval, or adds QA subtasks from the dev side.'},
  {id:'g2',gate:2,name:'Owner approves plan & drafts',title:'Human gate 2',x:500,y:640,w:300,p:'fb',
-  role:'The owner reviews the build plan and any Jira drafts. Nothing is built or created in Jira until approved.',
-  in:['Build plan','Jira drafts (feature path)'],out:['Approved plan','Owner choice for each draft'],when:'After planning, on both paths.'},
+  role:'The owner reviews the build plan and any tracker drafts. Nothing is built or created in the tracker until approved.',
+  in:['Build plan','Tracker drafts (feature path)'],out:['Approved plan','Owner choice for each draft'],when:'After planning, on both paths.'},
  {id:'g3',gate:3,name:'Owner confirms repo state',title:'Human gate 3',x:500,y:730,w:300,p:'fb',
   role:'Before any code is written, the owner confirms the branch and a clean working tree. Git Bot can advise here.',
   in:['Current branch and working tree'],out:['Go ahead for the build stage'],when:'Before every build stage, on both paths.'},
@@ -347,14 +347,14 @@ const N=[
   in:['Local diff and translation files'],out:['Localization findings per key and locale'],
   when:'Review stage, in parallel. Optional per project.',
   never:'Translates without review.'},
- {id:'opt',name:'Codacy Checker',title:'Codacy Checker',g:'review',x:795,y:975,w:170,p:'fb',
-  role:'Applies local Codacy-style rules: complexity, duplication, size, coverage 80%+ on changed code and a test for every planned and extra case. Gate: grade B or above.',
+ {id:'opt',name:'Code Quality Checker',title:'Code Quality Checker',g:'review',x:795,y:975,w:170,p:'fb',
+  role:'Applies local code quality rules (Codacy, SonarQube or DeepSource style, or no tool): complexity, duplication, size, coverage 80%+ on changed code and a test for every planned and extra case. Gate: grade B or above.',
   in:['Local diff','Build plan'],out:['Scorecard with failures only'],
   when:'Review stage, in parallel with the other checkers.',
   never:'Changes code directly. Suggestions go through the owner like every other review finding.'},
  {id:'g4',gate:4,name:'Owner picks review fixes',title:'Human gate 4',x:500,y:1080,w:300,p:'fb',
   role:'The owner sees all review findings and picks which go back to the devs. QA does not start while a high finding is open.',
-  in:['Review, security, localization and Codacy findings'],out:['Selected fixes sent back to devs (fix loop)','Go ahead for QA'],when:'After review, on both paths.'},
+  in:['Review, security, localization and code quality findings'],out:['Selected fixes sent back to devs (fix loop)','Go ahead for QA'],when:'After review, on both paths.'},
  {id:'qalead',name:'QA Lead',title:'QA Manager',g:'qa',x:500,y:1185,w:160,p:'fb',
   role:'Owns the quality gate. Runs or reviews the tests and gives a pass or fail verdict.',
   in:['Test cases from QA Test Writer','The built app'],out:['Pass / fail per test case with evidence','Verdict for the owner'],
@@ -368,13 +368,13 @@ const N=[
   in:['QA results and evidence'],out:['Final QA report'],
   when:'After a pass verdict on feature work.',
   never:'Changes verdicts.'},
- {id:'upd',name:'Jira Updater',title:'Status Updater',g:'close',x:500,y:1490,w:160,p:'fb',
-  role:'Closes the loop in Jira: updates statuses and posts the report in one batch.',
-  in:['QA report or QA verdict','Approved drafts'],out:['Drafted Jira comment and status changes, posted in one batch after approval'],
+ {id:'upd',name:'Tracker Updater',title:'Status Updater',g:'close',x:500,y:1490,w:160,p:'fb',
+  role:'Closes the loop in your tracker: updates statuses and posts the report in one batch.',
+  in:['QA report or QA verdict','Approved drafts'],out:['Drafted tracker comment and status changes, posted in one batch after approval'],
   when:'Last bot stage on both paths.',
   never:'Posts without owner approval.'},
  {id:'g6',gate:6,name:'Owner approves posting',title:'Human gate 6',x:500,y:1585,w:300,p:'fb',
-  role:'The owner reads the drafted Jira comment and target status. Only an explicit yes posts it.',
+  role:'The owner reads the drafted tracker comment and target status. Only an explicit yes posts it.',
   in:['Draft comment and status'],out:['Posted update, or nothing'],when:'End of both paths.'},
  {id:'done',name:'Owner commits & ships',title:'Done',x:500,y:1665,w:260,p:'fb',end:1,
   role:'The owner does all git work, grouping files per task with Git Bot\'s advice. The task is closed.',
@@ -384,8 +384,8 @@ const byId=Object.fromEntries(N.map(n=>[n.id,n]));
 // edges: [from,to,paths,type]
 const E=[
  ['captain','cache','fb','h'],['captainb','captain','fb','hadv'],['git','captainb','fb','hadv'],
- ['captain','jira','fb'],['captain','brs','f'],['captain','figma','f'],['captain','code','fb'],['captain','sentry','b'],['captain','firebase','b'],
- ['jira','gap','fb'],['brs','gap','f'],['figma','gap','f'],['code','gap','fb'],['sentry','gap','b'],['firebase','gap','b'],
+ ['captain','tracker','fb'],['captain','brs','f'],['captain','design','f'],['captain','code','fb'],['captain','crash','b'],['captain','analytics','b'],
+ ['tracker','gap','fb'],['brs','gap','f'],['design','gap','f'],['code','gap','fb'],['crash','gap','b'],['analytics','gap','b'],
  ['gap','g1','fb'],['g1','planner','fb'],['g1','drafter','f'],['planner','g2','fb'],['drafter','g2','f'],['g2','g3','fb'],
  ['g3','dev1','fb'],['g3','dev2','f'],['g3','qaw','fb'],
  ['dev1','J','fb'],['dev2','J','f'],['qaw','J','fb'],['J','pr','fb'],['J','sec','fb'],['J','loc','fb'],['J','opt','fb'],
@@ -438,8 +438,8 @@ N.forEach(n=>{
 });
 // path sequences for walk + overview
 const SEQ={
- feature:[['captain','Captain classifies the request as a feature'],['cache','Cache Keeper opens the task cache'],['jira','Intake in parallel: Jira, BRS, Figma and Code Analysts'],['gap','Gap Finder lists conflicts and open questions'],['g1',''],['planner','Dev Planner builds the plan while Jira Drafter drafts subtasks'],['g2',''],['g3',''],['dev1','Flutter Dev 1 and 2 build in parallel, QA Test Writer writes tests'],['pr','PR Reviewer, Security, Localization and Codacy Checker check the diff'],['g4',''],['qalead','QA Lead runs the tests'],['g5',''],['rep','QA Reporter writes the final report'],['upd','Jira Updater drafts the status update'],['g6',''],['done','Owner commits and ships']],
- bug:[['captain','Captain classifies the request as a bug'],['cache','Cache Keeper opens the task cache'],['sentry','Intake in parallel: Sentry, Firebase, Jira and Code Analysts'],['gap','Gap Finder confirms the root cause and open questions'],['g1',''],['planner','Dev Planner plans the smallest fix'],['g2',''],['g3',''],['dev1','Flutter Dev 1 fixes, QA Test Writer writes a test that reproduces the bug'],['pr','Review bots check the diff in parallel'],['g4',''],['qalead','QA Lead verifies the fix'],['g5',''],['upd','Jira Updater drafts the status update'],['g6',''],['done','Owner commits and ships']]
+ feature:[['captain','Captain classifies the request as a feature'],['cache','Cache Keeper opens the task cache'],['tracker','Intake in parallel: Tracker, BRS, Design and Code Analysts'],['gap','Gap Finder lists conflicts and open questions'],['g1',''],['planner','Dev Planner builds the plan while Task Drafter drafts subtasks'],['g2',''],['g3',''],['dev1','Flutter Dev 1 and 2 build in parallel, QA Test Writer writes tests'],['pr','PR Reviewer, Security, Localization and Code Quality Checker check the diff'],['g4',''],['qalead','QA Lead runs the tests'],['g5',''],['rep','QA Reporter writes the final report'],['upd','Tracker Updater drafts the status update'],['g6',''],['done','Owner commits and ships']],
+ bug:[['captain','Captain classifies the request as a bug'],['cache','Cache Keeper opens the task cache'],['crash','Intake in parallel: Crash, Analytics, Tracker and Code Analysts'],['gap','Gap Finder confirms the root cause and open questions'],['g1',''],['planner','Dev Planner plans the smallest fix'],['g2',''],['g3',''],['dev1','Flutter Dev 1 fixes, QA Test Writer writes a test that reproduces the bug'],['pr','Review bots check the diff in parallel'],['g4',''],['qalead','QA Lead verifies the fix'],['g5',''],['upd','Tracker Updater drafts the status update'],['g6',''],['done','Owner commits and ships']]
 };
 let mode='feature',sel=null;
 const inMode=p=>mode==='all'||p.includes(mode[0]);
@@ -456,7 +456,7 @@ function overview(){
  P.innerHTML=`<div class="pk">${mode==='all'?'All bots':m==='feature'?'✨ Feature path':'🐞 Bug path'}</div><h2>${mode==='all'?'The whole team':m==='feature'?'From request to shipped feature':'From bug report to verified fix'}</h2>
  <p class="tt">${mode==='all'?'Showing every bot. Pick a path above to see the order of work. Steps below follow the feature path.':'Click a step or any bot in the map for details.'}</p>
  <div class="sec"><h3>Steps</h3><ol class="steps">${s.map(([id,t])=>{const n=byId[id];return `<li class="${n.gate?'gt':''}" data-id="${id}">${esc(n.gate?n.title+': '+n.name:t)}</li>`}).join('')}</ol></div>
- <div class="sec"><h3>Why it matters</h3><p>Bots do the reading, building and checking. People make every decision that matters: answers, plans, what gets fixed, the quality verdict and anything posted to Jira.</p></div>`;
+ <div class="sec"><h3>Why it matters</h3><p>Bots do the reading, building and checking. People make every decision that matters: answers, plans, what gets fixed, the quality verdict and anything posted to the tracker.</p></div>`;
  P.querySelectorAll('.steps li').forEach(li=>li.onclick=()=>{stopWalk();select(li.dataset.id)});
 }
 function select(id){
@@ -479,7 +479,7 @@ function stopWalk(){if(timer){clearInterval(timer);timer=null;wb.textContent='�
 wb.onclick=()=>{if(timer){stopWalk();return}if(mode==='all'){mode='feature';applyMode()}const s=SEQ[mode];let i=0;select(s[0][0]);
  wb.textContent='■ Stop';wb.classList.add('stop');timer=setInterval(()=>{i++;if(i>=s.length){stopWalk();return}select(s[i][0]);nodeEls[s[i][0]].scrollIntoView({block:'nearest',behavior:'smooth'})},2200)};
 document.querySelectorAll('.seg button').forEach(b=>b.onclick=()=>{stopWalk();mode=b.dataset.mode;applyMode();if(sel&&!inMode(byId[sel].p))sel&&nodeEls[sel].classList.remove('sel'),sel=null;sel?select(sel):overview()});
-// deep link: #mode=bug&node=sentry
+// deep link: #mode=bug&node=crash
 const h=new URLSearchParams(location.hash.slice(1));if(['feature','bug','all'].includes(h.get('mode')))mode=h.get('mode');
 applyMode();h.get('node')&&byId[h.get('node')]?select(h.get('node')):overview();
 </script>

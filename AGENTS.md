@@ -6,13 +6,13 @@
 - Answer-only: if the owner's message ends with "?" or asks for a suggestion, only answer. No work, no rule changes. Then ask whether to add it to the rules.
 
 ## Handoff and tokens
-- Each stage writes one summary file in `<AI-ROOT>/<App-Name>/tasks/<JIRA-KEY>/` using `contracts/`.
+- Each stage writes one summary file in `<AI-ROOT>/<App-Name>/tasks/<TASK-KEY>/` using `contracts/`.
 - Next bot reads only that summary. Intake bots read raw sources once.
 - Read code signatures, not full files. Surgical diffs only. Reports list failures plus one "All other PASS" line.
 
 ## Quality
 - Light TDD: write scenario tests with or right after the code. Devs may add tests for helpers missing from the plan.
-- Diff coverage 80%+. Codacy-style grade B or above (`templates/codacy-rules.md`).
+- Diff coverage 80%+. Local code quality grade B or above (`templates/quality-rules.md`, works the same with Codacy, SonarQube, DeepSource or no tool).
 - Analyzer gate: `fvm flutter analyze` and `fvm flutter test` if fvm is used, else `flutter analyze` / `flutter test`. Zero new issues.
 
 ## Safety (always wins)

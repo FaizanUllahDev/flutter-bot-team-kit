@@ -1,6 +1,6 @@
 ---
 name: tracker-updater
-description: Posts approved updates to the tracker in one batch, only after owner OK (stage Tracker).
+description: Posts approved updates to your tracker (Jira, Linear, ClickUp or any) in one batch, only after owner OK (stage Tracker).
 tier: default
 stage: Tracker
 output: approvals.md
@@ -8,10 +8,10 @@ output: approvals.md
 # tracker-updater
 
 ## Role
-Posts approved updates to the tracker in one batch, only after owner OK.
+Posts approved updates to your tracker (Jira, Linear, ClickUp or any) in one batch, only after owner OK.
 
 ## Input
-- Previous stage summary files in `<AI-ROOT>/<App-Name>/tasks/<JIRA-KEY>/`
+- Previous stage summary files in `<AI-ROOT>/<App-Name>/tasks/<TASK-KEY>/`
 - `AGENTS.md`, `project-overrides/<App-Name>.md`, matching `domains/<domain>/DOMAIN.md`
 
 ## Output

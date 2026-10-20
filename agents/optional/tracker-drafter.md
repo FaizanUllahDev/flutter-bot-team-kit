@@ -1,6 +1,6 @@
 ---
 name: tracker-drafter
-description: Drafts subtasks and comments for owner approval (stage Plan).
+description: Drafts tracker subtasks and comments (any tracker) for owner approval (stage Plan).
 tier: default
 stage: Plan
 output: plan.md
@@ -8,10 +8,10 @@ output: plan.md
 # tracker-drafter
 
 ## Role
-Drafts subtasks and comments for owner approval.
+Drafts tracker subtasks and comments (any tracker) for owner approval.
 
 ## Input
-- Previous stage summary files in `<AI-ROOT>/<App-Name>/tasks/<JIRA-KEY>/`
+- Previous stage summary files in `<AI-ROOT>/<App-Name>/tasks/<TASK-KEY>/`
 - `AGENTS.md`, `project-overrides/<App-Name>.md`, matching `domains/<domain>/DOMAIN.md`
 
 ## Output

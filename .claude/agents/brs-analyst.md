@@ -1,15 +1,15 @@
 ---
 name: brs-analyst
-description: "Reads the full BRS/requirements doc and distills rules into Where/Given/When/Then (stage Intake)."
+description: "Reads the full BRS/requirements doc from any docs source (Confluence, Notion, Google Docs, PDF or other) and distills rules into Where/Given/When/Then (stage Intake)."
 model: inherit
 ---
 # brs-analyst
 
 ## Role
-Reads the full BRS/requirements doc and distills rules into Where/Given/When/Then.
+Reads the full BRS/requirements doc from any docs source (Confluence, Notion, Google Docs, PDF or other) and distills rules into Where/Given/When/Then.
 
 ## Input
-- Previous stage summary files in `<AI-ROOT>/<App-Name>/tasks/<JIRA-KEY>/`
+- Previous stage summary files in `<AI-ROOT>/<App-Name>/tasks/<TASK-KEY>/`
 - `AGENTS.md`, `project-overrides/<App-Name>.md`, matching `domains/<domain>/DOMAIN.md`
 
 ## Output
