@@ -1,0 +1,34 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(**/.env)",
+      "Read(**/.env.*)",
+      "Read(**/env_key*.dart)",
+      "Read(**/*.jks)",
+      "Read(**/*.keystore)",
+      "Read(**/*.p12)",
+      "Read(**/key.properties)",
+      "Read(**/GoogleService-Info.plist)",
+      "Read(**/google-services.json)",
+      "Read(**/test-accounts.md)",
+      "Edit(**/.env)",
+      "Bash(git commit *)",
+      "Bash(git push *)",
+      "Bash(git rebase *)",
+      "Bash(git reset --hard *)",
+      "Bash(git tag *)",
+      "Bash(cat *.env*)"
+    ],
+    "ask": [
+      "Edit(android/**)",
+      "Edit(ios/**)",
+      "Bash(git *)"
+    ],
+    "allow": [
+      "Bash(fvm flutter analyze *)",
+      "Bash(fvm flutter test *)",
+      "Bash(flutter analyze *)",
+      "Bash(flutter test *)"
+    ]
+  }
+}

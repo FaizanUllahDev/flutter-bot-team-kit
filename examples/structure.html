@@ -1,0 +1,51 @@
+<html><head><style>
+body{margin:0;background:#f4f7fc;font-family:Helvetica,Arial,sans-serif;width:1400px}
+.h{background:#00377d;color:#fff;padding:28px 40px;border-bottom:6px solid #ffd100}
+.h h1{margin:0;font-size:34px}.h p{margin:6px 0 0;color:#cfe0ff;font-size:16px}
+.wrap{padding:24px 40px}
+.g{background:#fff;border-radius:12px;margin-bottom:18px;padding:16px 22px;border-left:8px solid var(--c);box-shadow:0 2px 6px rgba(0,0,0,.06)}
+.r{display:flex;align-items:center;padding:5px 0;font-size:16px;border-bottom:1px dashed #e3e9f3}
+.r:last-child{border:0}
+.n{box-sizing:border-box;width:560px;font-family:Menlo,monospace;color:#0b2147;font-weight:600;flex-shrink:0}
+.d{color:#4a5b78}
+.i{display:inline-block;width:20px}
+.f{background:#00377d;color:#fff;padding:18px 40px;font-size:17px}
+.f b{color:#ffd100}.f small{display:block;margin-top:6px;color:#cfe0ff}
+</style></head><body>
+<div class="h"><h1>&lt;AI-ROOT&gt;/ Repository Structure</h1><p>How our bot workflow is organized on the owner's computer, in the repo, in Cursor and in the cloud</p></div>
+<div class="wrap">
+<div class="g" style="--c:#00377d">
+<div class="r"><div class="n" style="box-sizing:border-box;padding-left:0px">📁 &lt;AI-ROOT&gt;/</div><div class="d">Root on the owner's computer</div></div>
+<div class="r"><div class="n" style="box-sizing:border-box;padding-left:28px">📁 _shared/</div><div class="d">Tools for all apps</div></div>
+<div class="r"><div class="n" style="box-sizing:border-box;padding-left:56px">📁 qa-kit/</div><div class="d">Optional QA tools (UI flows, image diff, proxy, mocks)</div></div>
+<div class="r"><div class="n" style="box-sizing:border-box;padding-left:56px">📁 report-template/</div><div class="d">QA report HTML template</div></div><div class="r"><div class="n" style="box-sizing:border-box;padding-left:56px">📁 contracts/ <span style="background:#ffd100;color:#00377d;font-size:11px;padding:1px 6px;border-radius:4px;font-family:Helvetica">NEW</span></div><div class="d">Output format per stage (brief, gap, plan, review, codacy, qa)</div></div><div class="r"><div class="n" style="box-sizing:border-box;padding-left:56px">📁 domains/ <span style="background:#ffd100;color:#00377d;font-size:11px;padding:1px 6px;border-radius:4px;font-family:Helvetica">NEW</span></div><div class="d">fintech/DOMAIN.md (generic fintech best practices)</div></div><div class="r"><div class="n" style="box-sizing:border-box;padding-left:56px"> </div><div class="d">telecom/DOMAIN.md (generic telecom best practices)</div></div>
+<div class="r"><div class="n" style="box-sizing:border-box;padding-left:28px">📁 &lt;App-Name&gt;/</div><div class="d">One folder per app</div></div>
+<div class="r"><div class="n" style="box-sizing:border-box;padding-left:56px">📄 PROJECT_CONTEXT.md</div><div class="d">App overview, stack, architecture</div></div>
+<div class="r"><div class="n" style="box-sizing:border-box;padding-left:56px">📄 rules.md</div><div class="d">Team rules (gates, safety, token saving)</div></div>
+<div class="r"><div class="n" style="box-sizing:border-box;padding-left:56px">📁 project/</div><div class="d">codacy-rules, quality-must-haves, devices, app-internals, test-accounts (local only)</div></div>
+<div class="r"><div class="n" style="box-sizing:border-box;padding-left:56px">📁 tasks/&lt;JIRA-KEY&gt;/</div><div class="d">brief, gap, plan, review, codacy, qa, loops, approvals (.md)</div></div>
+<div class="r"><div class="n" style="box-sizing:border-box;padding-left:56px">📁 reviews/</div><div class="d">PR review history</div></div>
+<div class="r"><div class="n" style="box-sizing:border-box;padding-left:56px">📁 qa/</div><div class="d">Screenshots, recordings, reports</div></div><div class="r"><div class="n" style="box-sizing:border-box;padding-left:56px">📁 project-overrides/ <span style="background:#ffd100;color:#00377d;font-size:11px;padding:1px 6px;border-radius:4px;font-family:Helvetica">NEW</span></div><div class="d">Project rules that win, except safety rules</div></div>
+<div class="r"><div class="n" style="box-sizing:border-box;padding-left:28px">📁 &lt;Next-App&gt;/</div><div class="d">Same layout for future apps</div></div>
+</div>
+<div class="g" style="--c:#ffd100">
+<div class="r"><div class="n" style="box-sizing:border-box;padding-left:0px">📁 &lt;REPO&gt;/.cursor/</div><div class="d">Project-level Cursor config</div></div>
+<div class="r"><div class="n" style="box-sizing:border-box;padding-left:28px">📄 rules/team-workspace.mdc</div><div class="d">Synced team rules</div></div>
+<div class="r"><div class="n" style="box-sizing:border-box;padding-left:28px">📁 skills/</div><div class="d">flutter-captain and Flutter skills</div></div>
+</div>
+<div class="g" style="--c:#2e8b57">
+<div class="r"><div class="n" style="box-sizing:border-box;padding-left:0px">📁 ~/.cursor/</div><div class="d">User-level Cursor config</div></div>
+<div class="r"><div class="n" style="box-sizing:border-box;padding-left:28px">📄 agents/*.md</div><div class="d">Cursor subagents (Gap Finder, Dev Planner on a strong model; rest auto)</div></div>
+<div class="r"><div class="n" style="box-sizing:border-box;padding-left:28px">📁 skills/</div><div class="d">flutter-captain, clean-feature, feature-review, legacy-edit, responsive-ui, reusable-widget</div></div>
+</div>
+<div class="g" style="--c:#7b4fc9">
+<div class="r"><div class="n" style="box-sizing:border-box;padding-left:0px">🤖 Bot team (cloud, optional)</div><div class="d">Bots that run the pipeline</div></div>
+<div class="r"><div class="n" style="box-sizing:border-box;padding-left:28px">🤖 Captain, Captain B (optional)</div><div class="d">Orchestrate the pipeline</div></div>
+<div class="r"><div class="n" style="box-sizing:border-box;padding-left:28px">🤖 Intake</div><div class="d">BRS, Tracker, Design, Code Analysts</div></div>
+<div class="r"><div class="n" style="box-sizing:border-box;padding-left:28px">🤖 Plan</div><div class="d">Gap Finder, Dev Planner, Tracker Drafter</div></div>
+<div class="r"><div class="n" style="box-sizing:border-box;padding-left:28px">🤖 Build</div><div class="d">Flutter Dev 1 and 2, QA Test Writer</div></div>
+<div class="r"><div class="n" style="box-sizing:border-box;padding-left:28px">🤖 Review</div><div class="d">PR Reviewer, Codacy Checker, Security, Localization (optional)</div></div>
+<div class="r"><div class="n" style="box-sizing:border-box;padding-left:28px">🤖 QA</div><div class="d">QA Lead, QA Reporter, Tracker Updater</div></div>
+<div class="r"><div class="n" style="box-sizing:border-box;padding-left:28px">🤖 Support</div><div class="d">Cache Keeper, Git Advisor, Crash/Firebase Analysts (optional, idle)</div></div>
+</div>
+</div><div class="f"><b>Pipeline:</b> Intake &gt; Gap &gt; Plan &gt; Dev + Tests &gt; Analyze &gt; Review &gt; QA &gt; Report &gt; Tracker<small>Approval gate after every stage. The owner approves commits, tracker posts and status changes.</small></div></body></html>

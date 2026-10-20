@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Bot Team | Simple overview</title>
+<style>
+:root{--bg:#0B1220;--card:#131C2E;--line:#26324A;--mut:#9FB0C8;--txt:#E8EEF8;--cy:#38BDF8;--vi:#A78BFA;--li:#A3E635;--am:#FBBF24;--ro:#FB7185;
+--head:'Plus Jakarta Sans','Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--body:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--mono:'JetBrains Mono','DejaVu Sans Mono',ui-monospace,Menlo,Consolas,monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--body);background:var(--bg);color:var(--txt);min-height:100vh}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(900px 600px at 95% -10%,rgba(56,189,248,.16),transparent 60%),radial-gradient(800px 600px at -10% 110%,rgba(167,139,250,.14),transparent 60%)}
+.page{position:relative;max-width:1440px;margin:0 auto;padding:44px 40px 60px}
+.kicker{font:700 14px var(--body);letter-spacing:.18em;color:var(--cy);text-transform:uppercase}
+h1{font:800 clamp(34px,4.2vw,56px)/1.06 var(--head);letter-spacing:-.02em;margin-top:12px}
+h1 em{font-style:normal;background:linear-gradient(90deg,var(--cy),var(--vi));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{font:500 18px/1.5 var(--body);color:var(--mut);margin-top:14px;max-width:880px}
+.bar{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin:26px 0 18px}
+.seg{display:inline-flex;background:#0F1729;border:1.5px solid var(--line);border-radius:14px;padding:4px}
+.seg button{font:700 15px var(--body);color:var(--mut);background:none;border:0;border-radius:10px;padding:10px 18px;cursor:pointer}
+.seg button.on[data-mode=feature]{background:#0E3A52;color:#7DD3FC;box-shadow:inset 0 0 0 1.5px var(--cy)}
+.seg button.on[data-mode=bug]{background:#3B1D2E;color:#FDA4AF;box-shadow:inset 0 0 0 1.5px var(--ro)}
+.seg button.on[data-mode=all]{background:#1E293B;color:var(--txt);box-shadow:inset 0 0 0 1.5px #475569}
+.btn{font:700 15px var(--body);color:#0B1220;background:linear-gradient(90deg,var(--cy),var(--vi));border:0;border-radius:12px;padding:12px 18px;cursor:pointer}
+.btn.stop{background:#334155;color:var(--txt)}
+.legend{display:flex;flex-wrap:wrap;gap:16px;margin-left:auto;font:600 13.5px var(--body);color:var(--mut)}
+.legend i{display:inline-block;width:14px;height:14px;border-radius:4px;margin-right:6px;vertical-align:-2px}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:26px;align-items:start}
+.netwrap{background:rgba(19,28,46,.55);border:1.5px solid var(--line);border-radius:22px;padding:14px}
+svg{width:100%;height:auto;display:block}
+.node{cursor:pointer;transition:opacity .35s}
+.node rect.box{fill:#131C2E;stroke-width:1.6;transition:stroke-width .2s}
+.node:hover rect.box,.node:focus rect.box{stroke-width:3}
+.node:focus{outline:none}
+.node text{pointer-events:none}
+.nm{font:700 15px var(--body);fill:var(--txt)}
+.gp{font:600 11px var(--body);fill:var(--mut);letter-spacing:.06em;text-transform:uppercase}
+.gate rect.box{fill:rgba(251,191,36,.10);stroke:var(--am);stroke-dasharray:6 4;stroke-width:2}
+.gate .nm{fill:#FCD34D;font-size:14px}
+.gate .gp{fill:#E5D4A1}
+.node.sel rect.box{stroke-width:3.5;filter:url(#glow)}
+.node.dim{opacity:.18}
+.edge{fill:none;stroke:#334155;stroke-width:2;transition:opacity .35s,stroke .35s}
+.edge.dim{opacity:.10}
+.edge.on{stroke-width:2.6;stroke-dasharray:7 9;animation:flow 1.1s linear infinite}
+.edge.on.f{stroke:var(--cy)} .edge.on.b{stroke:var(--ro)}
+.edge.loop{stroke:var(--vi);stroke-dasharray:5 6;opacity:.7}
+.edge.loop.on{stroke:var(--vi);opacity:1}
+.edge.adv{stroke:#64748B;stroke-dasharray:3 6}
+.edge.adv.on{stroke:#94A3B8}
+@keyframes flow{to{stroke-dashoffset:-32}}
+.stage{font:700 11px var(--body);fill:#5B6B85;letter-spacing:.14em;text-transform:uppercase;paint-order:stroke;stroke:#0F1727;stroke-width:5px;stroke-linejoin:round}
+.rail rect{fill:url(#railg)}
+.pulse{animation:pulse 1.6s ease-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes pulse{0%{opacity:.9;transform:scale(1)}100%{opacity:0;transform:scale(1.25)}}
+@media (prefers-reduced-motion:reduce){.edge.on,.pulse{animation:none}}
+.panel{position:sticky;top:20px;background:linear-gradient(180deg,#151F33,#111A2B);border:1.5px solid var(--line);border-radius:22px;padding:24px;max-height:calc(100vh - 40px);overflow:auto}
+.panel .pk{font:700 12px var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--cy)}
+.panel h2{font:800 28px/1.15 var(--head);margin-top:8px}
+.panel .tt{font:600 15px var(--body);color:var(--mut);margin-top:4px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.chip{font:700 12px var(--body);border-radius:999px;padding:4px 10px;border:1.5px solid}
+.chip.f{color:#7DD3FC;border-color:var(--cy)}.chip.b{color:#FDA4AF;border-color:var(--ro)}.chip.g{color:#FCD34D;border-color:var(--am)}.chip.n{color:var(--mut);border-color:#334155}
+.sec{margin-top:18px}
+.sec h3{font:700 12px var(--body);letter-spacing:.14em;text-transform:uppercase;color:#7C8BA3;margin-bottom:6px}
+.sec p,.sec li{font:500 15.5px/1.5 var(--body);color:#D3DDEB}
+.sec ul{padding-left:18px}
+.sec.never p{color:#FDA4AF}
+.steps{list-style:none;padding:0!important;counter-reset:s}
+.steps li{counter-increment:s;display:flex;gap:10px;padding:7px 0;border-bottom:1px solid #1E293B;cursor:pointer}
+.steps li:before{content:counter(s);flex:none;width:24px;height:24px;border-radius:50%;background:#1E293B;color:var(--txt);font:800 12px var(--body);display:grid;place-items:center}
+.steps li.gt{color:#FCD34D}
+.steps li.gt:before{content:"✋";background:rgba(251,191,36,.18)}
+.steps li:hover{color:#fff}
+.handoff{display:flex;flex-wrap:wrap;gap:6px}
+.handoff button{font:600 13px var(--body);background:#1E293B;color:var(--txt);border:1px solid #334155;border-radius:8px;padding:5px 9px;cursor:pointer}
+.rules{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:26px}
+.rule{background:var(--card);border:1.5px solid var(--line);border-radius:18px;padding:18px}
+.rule b{display:block;font:800 18px/1.25 var(--head);margin-bottom:6px}
+.rule span{font:500 14.5px/1.5 var(--body);color:var(--mut)}
+.src{margin-top:22px;font:500 13px/1.5 var(--body);color:#5B6B85}
+@media (max-width:1100px){.grid{grid-template-columns:1fr}.panel{position:static;max-height:none}.rules{grid-template-columns:1fr 1fr}.legend{margin-left:0}}
+@media (max-width:640px){.page{padding:28px 16px}.rules{grid-template-columns:1fr}}
+</style></head>
+<body><div class="page">
+<div class="kicker">For leadership · How our AI engineering team works</div>
+<h1>One Captain. Specialist bots.<br><em>The owner approves every gate.</em></h1>
+<p class="sub">The Captain takes every request and hands it to specialist bots, who work in parallel where safe. Work stops at owner approval gates, no bot ever commits code, and all bots share one cache instead of re-reading documents. Click any bot in the map to see what it does.</p>
+
+<div class="bar">
+ <div class="seg" role="tablist" aria-label="Path">
+  <button data-mode="feature" class="on">✨ Feature path</button>
+  <button data-mode="bug">🐞 Bug path</button>
+  <button data-mode="all">All bots</button>
+ </div>
+ <button class="btn" id="walk">▶ Walk through the path</button>
+ <div class="legend"><span><i style="background:var(--cy)"></i>Feature flow</span><span><i style="background:var(--ro)"></i>Bug flow</span><span><i style="background:var(--am)"></i>Human gate</span><span><i style="background:var(--vi)"></i>Fix loop</span><span><i style="background:var(--li)"></i>Shared cache</span></div>
+</div>
+
+<div class="grid">
+ <div class="netwrap"><svg id="net" viewBox="0 0 1000 1700" role="img" aria-label="Bot team network"></svg></div>
+ <aside class="panel" id="panel" aria-live="polite"></aside>
+</div>
+
+<style>
+.cards4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:14px}
+.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
+@media (max-width:1100px){.cards4,.cards3{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.cards4,.cards3{grid-template-columns:1fr}}
+.mini{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:16px}
+.mini b{display:block;font:800 16.5px/1.25 var(--head);margin-bottom:5px}
+.mini span{font:500 14px/1.5 var(--body);color:var(--mut)}
+.hs{font:800 28px/1.15 var(--head);margin:40px 0 4px}
+.hs small{display:block;font:700 12px var(--body);letter-spacing:.16em;color:var(--cy);text-transform:uppercase;margin-bottom:6px}
+ol.chain{counter-reset:c;list-style:none;margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:8px 20px}
+ol.chain li{counter-increment:c;display:flex;gap:10px;font:500 15px/1.45 var(--body);color:#D3DDEB;padding:8px 0;border-bottom:1px solid #1E293B}
+ol.chain li:before{content:counter(c);flex:none;width:26px;height:26px;border-radius:50%;background:#0E3A52;color:#7DD3FC;font:800 12px var(--body);display:grid;place-items:center}
+ol.chain li.g{color:#FCD34D}
+@media (max-width:900px){ol.chain{grid-template-columns:1fr}}
+.tbd{font:800 12px var(--body);color:#FCD34D;border:1.5px solid var(--am);border-radius:999px;padding:2px 8px;margin-left:6px}
+.mini ul{padding-left:18px;margin-top:4px}.mini li{font:500 14px/1.6 var(--body);color:var(--mut)}
+code{font:500 12.5px var(--mono);background:#0F1729;border:1px solid #1E293B;border-radius:6px;padding:1px 5px;color:#BAE6FD}
+</style>
+
+<h2 class="hs"><small>The flow</small>Handoff chain</h2>
+<ol class="chain">
+<li>Captain reads the request and picks the path (a question gets an answer only)</li>
+<li>Intake bots read Jira, the requirements doc, Figma and the code once</li>
+<li class="g">The owner approves the brief</li>
+<li>Gap Finder lists gaps and questions</li>
+<li class="g">The owner answers, and the answers go to the planner</li>
+<li>Dev Planner writes the plan, test cases and must-haves</li>
+<li class="g">The owner approves the plan and confirms the repo</li>
+<li>Devs build and write tests, QA writes test cases</li>
+<li>Analyzer gate: fail goes back to devs</li>
+<li>Review bots check in parallel, comments go back to devs</li>
+<li>QA tests on devices: fail means rework, pass means the report</li>
+<li class="g">The owner accepts the QA report, then Jira is updated and Done</li>
+</ol>
+
+<h2 class="hs"><small>Key rules</small>What every bot follows</h2>
+<div class="cards4">
+ <div class="mini"><b>✅ Quality first</b><span>Must-haves before coding, self-check before handoff.</span></div>
+ <div class="mini"><b>🧪 Light TDD</b><span>Test cases planned, tests written for every new function.</span></div>
+ <div class="mini"><b>📊 Code gate</b><span>Grade B or above, 80%+ coverage on changed code.</span></div>
+ <div class="mini"><b>🎯 Pixel QA</b><span>Checked against Figma on several device sizes.</span></div>
+ <div class="mini"><b>💰 Token saving</b><span>Short summary files, related files only, failures only.</span></div>
+ <div class="mini"><b>🧠 Right model</b><span>Heavy model only for gaps and planning.</span></div>
+ <div class="mini"><b>🔄 One rulebook</b><span>Cache Keeper syncs chat bots and Cursor agents.</span></div>
+ <div class="mini"><b>🧩 Project first</b><span>The project's own rules win, except safety rules.</span></div>
+</div>
+
+<h2 class="hs"><small>Trust</small>How it stays safe and reliable</h2>
+<div class="cards4">
+ <div class="mini"><b>📈 Metrics (to be measured)</b><ul><li>Hours saved per ticket <span class="tbd">TBD</span></li><li>Rework loops <span class="tbd">TBD</span></li><li>Token cost per feature <span class="tbd">TBD</span></li></ul></div>
+ <div class="mini"><b>🗂️ Concurrency</b><span>Each task has its own <code>tasks/&lt;JIRA-KEY&gt;/</code> folder. Shared files are edited by one dev at a time.</span></div>
+ <div class="mini"><b>⛔ Stuck gates</b><span>Gates never auto-approve. Work waits for the owner. Captain B only prepares work.</span></div>
+ <div class="mini"><b>🔁 Loop metrics</b><span>Analyzer fails, PR comments and QA fails are logged in <code>tasks/&lt;KEY&gt;/loops.md</code>.</span></div>
+ <div class="mini"><b>⚡ Small fix route</b><span>A typo or one-line fix skips Gap and Plan: dev, analyze, quick review, 1 to 2 gates.</span></div>
+ <div class="mini"><b>🧾 Audit trail</b><span><code>tasks/&lt;KEY&gt;/approvals.md</code> records stage, decision, by whom and when.</span></div>
+ <div class="mini"><b>💾 Checkpointing</b><span>Every stage writes its .md, so any bot can resume from the last finished stage.</span></div>
+</div>
+
+<h2 class="hs"><small>FAQ</small>Quick answers</h2>
+<div class="cards4">
+ <div class="mini"><b>What if bots disagree?</b><span>Captain decides, and the owner has the final say.</span></div>
+ <div class="mini"><b>Faster, but better?</b><span>Yes: the code gate, pixel QA and loop metrics keep quality up.</span></div>
+ <div class="mini"><b>What if a bot is wrong?</b><span>Every stage has an owner gate plus review.</span></div>
+ <div class="mini"><b>Is data safe?</b><span>Test data stays local, no secrets are read, and only the owner does git.</span></div>
+</div>
+<p class="src">A general explainer of how the bot team works. Metrics will be added once measured.</p>
+</div>
+
+<script>
+const G={hq:['Captain HQ','#38BDF8'],intake:['Intake','#7DD3FC'],plan:['Planning','#A78BFA'],build:['Build','#60A5FA'],review:['Review','#F472B6'],qa:['QA','#A3E635'],close:['Close','#FBBF24'],gate:['Human gate','#FBBF24']};
+const N=[
+ {id:'cache',name:'Cache Keeper',title:'Cache and Context Keeper',g:'hq',x:175,y:70,w:170,p:'fb',
+  role:'Owns the shared cache for the app. Keeps it tidy, removes duplicates and serves context so other bots never re-read raw tickets, docs or designs.',
+  in:['Summaries written by every analyst and stage','Source change notices (marks stale entries)'],
+  out:['One shared cache folder per app','Distilled requirements, design, code map, gaps, plan, test cases, review and QA results'],
+  when:'From the very start of every task, and throughout. Old task folders are only removed after the owner agrees.',
+  never:'Stores secrets or lets bots write outside the cache layout.'},
+ {id:'captain',name:'Captain',title:'Team Lead and Orchestrator',g:'hq',x:415,y:70,w:160,p:'fb',
+  role:'The only entry point. Reads the request, classifies it as feature, bug or small fix, assigns each stage and enforces every gate. Has the final say.',
+  in:['Jira ticket, BRS link, Figma link, bug report or plain request','Team rules and project setup'],
+  out:['Route (feature, bug or fix) and stage assignments','Status updates to the owner: stage, owner, blockers'],
+  when:'First, on every request. Stays in charge until the task is closed.',
+  never:'Writes code itself, commits or pushes.'},
+ {id:'captainb',name:'Captain B',title:'Co-Lead',g:'hq',x:615,y:70,w:160,p:'fb',
+  role:'Second lead for parallel work. Runs a separate task end to end with the same bots, cache and data, so two tasks can move at once.',
+  in:['A second request from the owner','Shared cache and team bots'],
+  out:['A second task run through the same pipeline and gates','Sync with Captain before any shared file is touched'],
+  when:'Whenever a second task needs to run in parallel with the Captain\'s task.',
+  never:'Overrides Captain or edits files Captain is using without agreement. If both need the same files, they go one at a time and Captain decides.'},
+ {id:'git',name:'Git Bot',title:'Git Advisor',g:'hq',x:840,y:70,w:150,p:'fb',
+  role:'Advice only. Answers git questions in Captain HQ: commands, branch names, conflict fixes and which files belong to which task.',
+  in:['Owner questions','Changed files per task'],
+  out:['Suggested commands and branch names','File grouping per task for the owner\'s commit'],
+  when:'On demand, mainly at the repo state check before build and at the end when the owner commits.',
+  never:'Runs git, commits, pushes or rewrites history.'},
+
+ {id:'jira',name:'Jira Analyst',title:'Requirements Analyst',g:'intake',x:140,y:215,w:134,p:'fb',
+  role:'Reads the ticket fully: description, every comment, attachments and linked issues, then writes distilled requirements to the cache.',
+  in:['Jira ticket, comments, sub-tasks, attachments, links'],
+  out:['Ticket summary with acceptance criteria','Latest decisions from comments','Unclear points for Gap Finder'],
+  when:'Intake stage, in parallel with the other analysts. Runs on both feature and bug work.',
+  never:'Skims, invents missing information or edits tickets.'},
+ {id:'brs',name:'BRS Analyst',title:'BRS and Docs Analyst',g:'intake',x:284,y:215,w:134,p:'f',
+  role:'Reads the business requirement documents and extracts rules, flows and API contracts into the cache.',
+  in:['BRS / Confluence pages linked to the task'],
+  out:['Flows, business rules, validations, error messages','Acceptance criteria and open points'],
+  when:'Intake stage on feature work, in parallel with the other analysts.',
+  never:'Re-reads raw docs once cached or edits the docs.'},
+ {id:'figma',name:'Figma Analyst',title:'Design Analyst',g:'intake',x:428,y:215,w:134,p:'f',
+  role:'Reads the design file once and captures screens, tokens, states and assets into the cache.',
+  in:['Figma frames linked to the task'],
+  out:['Per-screen design summary: layout, components, states','Exported frames for QA visual comparison'],
+  when:'Intake stage on feature work, in parallel with the other analysts.',
+  never:'Makes repeated design calls or guesses missing frames.'},
+ {id:'code',name:'Code Analyst',title:'Codebase and Reuse Analyst',g:'intake',x:572,y:215,w:134,p:'fb',
+  role:'Knows the repo. Maps the architecture, finds reusable widgets and services, and lists the files a change would touch. On bugs, it co-leads intake to find the root cause.',
+  in:['Local repository, current branch','Design summary when available'],
+  out:['Architecture signature','Reuse map: reuse as is, extend or new','Risk list and files likely to change'],
+  when:'Intake stage on both paths. Also sits in the Review group.',
+  never:'Changes code.'},
+ {id:'sentry',name:'Sentry Analyst',title:'Sentry Analyst (optional)',g:'intake',x:716,y:215,w:134,p:'b',
+  role:'Checks errors and traces and links the relevant issues and stack traces to the task.',
+  in:['Sentry issues, events and traces for the affected area'],
+  out:['Linked issues and stack traces in the cache'],
+  when:'Intake stage on bug work. Optional per project.',
+  never:'Resolves or mutes issues.'},
+ {id:'firebase',name:'Firebase Analyst',title:'Firebase Analyst (optional)',g:'intake',x:860,y:215,w:134,p:'b',
+  role:'Checks Crashlytics, Analytics and Remote Config and reports the crashes and configs tied to the task.',
+  in:['Crashlytics, Analytics, Remote Config'],
+  out:['Crash and config findings in the cache'],
+  when:'Intake stage on bug work. Optional per project.',
+  never:'Changes Firebase settings or deploys.'},
+
+ {id:'gap',name:'Gap Finder',title:'Requirements Gap Finder (heavy model)',g:'plan',x:500,y:345,w:170,p:'fb',
+  role:'Compares all intake summaries with each other and with the code. Lists gaps, conflicts and open questions with severity. On bugs, confirms the root cause before any plan.',
+  in:['All intake summaries from the cache'],
+  out:['Gap list with severity','Short questions for the owner, with options and a suggested default'],
+  when:'Right after intake, on both paths.',
+  never:'Fills gaps by assumption. Unanswered gaps stay open.'},
+ {id:'g1',gate:1,name:'Owner answers gaps',title:'Human gate 1',x:500,y:440,w:300,p:'fb',
+  role:'The owner answers the blocking questions from Gap Finder. Planning does not start while a blocking gap is open.',
+  in:['Gap list and questions'],out:['Owner decisions saved to the cache'],when:'After Gap Finder, on both paths.'},
+ {id:'planner',name:'Dev Planner',title:'Dev Planner (heavy model)',g:'plan',x:400,y:540,w:160,p:'fb',
+  role:'Turns findings into a build plan: steps, files, risks and estimates per developer, plus the split so two devs never touch the same files. Also lists the test cases and a Quality must-haves block.',
+  in:['Cached requirements, design, code map and answered gaps'],
+  out:['Build plan with tasks per dev','Edge cases and test plan hand-off for QA Test Writer'],
+  when:'After gate 1, on both paths.',
+  never:'Starts coding or plans a refactor nobody asked for.'},
+ {id:'drafter',name:'Jira Drafter',title:'Task Drafter',g:'plan',x:620,y:540,w:160,p:'f',
+  role:'Drafts short, specific dev subtasks in Jira (UI, API, Logic, Tests) in parallel with the Dev Planner.',
+  in:['Gap list and build plan'],
+  out:['Draft subtasks, held until the owner chooses: create, keep as draft or skip'],
+  when:'Planning stage on feature work, in parallel with the Dev Planner.',
+  never:'Creates or posts anything without owner approval, or adds QA subtasks from the dev side.'},
+ {id:'g2',gate:2,name:'Owner approves plan & drafts',title:'Human gate 2',x:500,y:640,w:300,p:'fb',
+  role:'The owner reviews the build plan and any Jira drafts. Nothing is built or created in Jira until approved.',
+  in:['Build plan','Jira drafts (feature path)'],out:['Approved plan','Owner choice for each draft'],when:'After planning, on both paths.'},
+ {id:'g3',gate:3,name:'Owner confirms repo state',title:'Human gate 3',x:500,y:730,w:300,p:'fb',
+  role:'Before any code is written, the owner confirms the branch and a clean working tree. Git Bot can advise here.',
+  in:['Current branch and working tree'],out:['Go ahead for the build stage'],when:'Before every build stage, on both paths.'},
+ {id:'dev1',name:'Flutter Dev 1',title:'Senior Flutter Developer',g:'build',x:310,y:840,w:160,p:'fb',
+  role:'Builds the planned work following the plan, the must-haves and the right skill, then writes tests for the planned cases plus any extra functions. Self-checks before handoff. On bugs, makes the smallest fix for the stated root cause.',
+  in:['Own tasks from the build plan','Code map and design summary from the cache'],
+  out:['Code changes with notes: files changed, why, how to test','A proposed commit message for the owner'],
+  when:'Build stage on both paths, after gate 3. Also receives fix requests from review and QA.',
+  never:'Commits, pushes, or starts before the repo state is confirmed.'},
+ {id:'dev2',name:'Flutter Dev 2',title:'Senior Flutter Developer',g:'build',x:500,y:840,w:160,p:'f',
+  role:'Builds in parallel with Dev 1 on a separate part of the plan and coordinates on any shared files.',
+  in:['Own tasks from the build plan','Code map and design summary from the cache'],
+  out:['Code changes with notes','A proposed commit message'],
+  when:'Build stage on feature work when the plan splits into parallel tasks.',
+  never:'Commits, pushes or touches files owned by Dev 1.'},
+ {id:'qaw',name:'QA Test Writer',title:'QA Test Case Writer',g:'build',x:690,y:840,w:160,p:'fb',
+  role:'Writes test cases while the devs build: Given/When/Then cases, edge cases and a regression list. On bugs, a test that reproduces the failure.',
+  in:['Build plan, acceptance criteria and edge cases'],
+  out:['Test cases and automated tests for QA Lead'],
+  when:'Build stage on both paths, in parallel with the devs.',
+  never:'Runs the final QA sign-off.'},
+ {id:'pr',name:'PR Reviewer',title:'Flutter PR Reviewer',g:'review',x:220,y:975,w:170,p:'fb',
+  role:'Reviews the diff for code quality, security awareness, performance and caching, rebuilds and file size. Shows findings to the owner first.',
+  in:['Local diff','Build plan and code map'],
+  out:['Review findings with severity and suggested fixes'],
+  when:'Review stage on both paths, in parallel with the other checkers.',
+  never:'Approves its own team\'s merge or edits code silently.'},
+ {id:'sec',name:'Security Checker',title:'Security Checker',g:'review',x:410,y:975,w:170,p:'fb',
+  role:'Scans the changes for risk: secrets, insecure storage, network settings, permissions and logging of sensitive data.',
+  in:['Local diff'],out:['Security findings with severity, secret values masked'],
+  when:'Review stage on both paths, in parallel.',
+  never:'Ignores high findings.'},
+ {id:'loc',name:'Localization Checker',title:'Localization Checker',g:'review',x:600,y:975,w:180,p:'fb',
+  role:'Checks strings and layouts: missing translation keys, hardcoded text, right-to-left layout and text overflow.',
+  in:['Local diff and translation files'],out:['Localization findings per key and locale'],
+  when:'Review stage, in parallel. Optional per project.',
+  never:'Translates without review.'},
+ {id:'opt',name:'Codacy Checker',title:'Codacy Checker',g:'review',x:795,y:975,w:170,p:'fb',
+  role:'Applies local Codacy-style rules: complexity, duplication, size, coverage 80%+ on changed code and a test for every planned and extra case. Gate: grade B or above.',
+  in:['Local diff','Build plan'],out:['Scorecard with failures only'],
+  when:'Review stage, in parallel with the other checkers.',
+  never:'Changes code directly. Suggestions go through the owner like every other review finding.'},
+ {id:'g4',gate:4,name:'Owner picks review fixes',title:'Human gate 4',x:500,y:1080,w:300,p:'fb',
+  role:'The owner sees all review findings and picks which go back to the devs. QA does not start while a high finding is open.',
+  in:['Review, security, localization and Codacy findings'],out:['Selected fixes sent back to devs (fix loop)','Go ahead for QA'],when:'After review, on both paths.'},
+ {id:'qalead',name:'QA Lead',title:'QA Manager',g:'qa',x:500,y:1185,w:160,p:'fb',
+  role:'Owns the quality gate. Runs or reviews the tests and gives a pass or fail verdict.',
+  in:['Test cases from QA Test Writer','The built app'],out:['Pass / fail per test case with evidence','Verdict for the owner'],
+  when:'After gate 4, on both paths. Failed cases go back to the devs for a new round.',
+  never:'Passes with open blockers.'},
+ {id:'g5',gate:5,name:'Pass verdict or send back',title:'Human gate 5',x:500,y:1285,w:300,p:'fb',
+  role:'The owner chooses: accept the pass verdict and move to the report, or send failed cases back to the devs.',
+  in:['QA verdict and evidence'],out:['Final report request, or a new fix round'],when:'After every QA round, on both paths.'},
+ {id:'rep',name:'QA Reporter',title:'QA Report Writer',g:'qa',x:400,y:1390,w:160,p:'f',
+  role:'Fills the shared report template (sections can be shown or hidden): pixel check, translations, devices, error flows, performance and failed API requests.',
+  in:['QA results and evidence'],out:['Final QA report'],
+  when:'After a pass verdict on feature work.',
+  never:'Changes verdicts.'},
+ {id:'upd',name:'Jira Updater',title:'Status Updater',g:'close',x:500,y:1490,w:160,p:'fb',
+  role:'Closes the loop in Jira: updates statuses and posts the report in one batch.',
+  in:['QA report or QA verdict','Approved drafts'],out:['Drafted Jira comment and status changes, posted in one batch after approval'],
+  when:'Last bot stage on both paths.',
+  never:'Posts without owner approval.'},
+ {id:'g6',gate:6,name:'Owner approves posting',title:'Human gate 6',x:500,y:1585,w:300,p:'fb',
+  role:'The owner reads the drafted Jira comment and target status. Only an explicit yes posts it.',
+  in:['Draft comment and status'],out:['Posted update, or nothing'],when:'End of both paths.'},
+ {id:'done',name:'Owner commits & ships',title:'Done',x:500,y:1665,w:260,p:'fb',end:1,
+  role:'The owner does all git work, grouping files per task with Git Bot\'s advice. The task is closed.',
+  in:['Approved changes'],out:['Committed and shipped work'],when:'After gate 6.'}
+];
+const byId=Object.fromEntries(N.map(n=>[n.id,n]));
+// edges: [from,to,paths,type]
+const E=[
+ ['captain','cache','fb','h'],['captainb','captain','fb','hadv'],['git','captainb','fb','hadv'],
+ ['captain','jira','fb'],['captain','brs','f'],['captain','figma','f'],['captain','code','fb'],['captain','sentry','b'],['captain','firebase','b'],
+ ['jira','gap','fb'],['brs','gap','f'],['figma','gap','f'],['code','gap','fb'],['sentry','gap','b'],['firebase','gap','b'],
+ ['gap','g1','fb'],['g1','planner','fb'],['g1','drafter','f'],['planner','g2','fb'],['drafter','g2','f'],['g2','g3','fb'],
+ ['g3','dev1','fb'],['g3','dev2','f'],['g3','qaw','fb'],
+ ['dev1','J','fb'],['dev2','J','f'],['qaw','J','fb'],['J','pr','fb'],['J','sec','fb'],['J','loc','fb'],['J','opt','fb'],
+ ['pr','g4','fb'],['sec','g4','fb'],['loc','g4','fb'],['opt','g4','fb'],
+ ['g4','qalead','fb'],['qalead','g5','fb'],['g5','rep','f'],['rep','upd','f'],['g5','upd','b','bypass'],['upd','g6','fb'],['g6','done','fb'],
+ ['g4','dev1','fb','loop1'],['g5','dev1','fb','loop2'],['git','g3','fb','gitg3'],['git','done','fb','gitdone']
+];
+const H=52;
+const svg=document.getElementById('net'),NS='http://www.w3.org/2000/svg';
+const el=(t,a={},p=svg)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);p.appendChild(e);return e};
+const defs=el('defs');
+defs.innerHTML='<filter id="glow" x="-30%" y="-60%" width="160%" height="220%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter><linearGradient id="railg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A3E635" stop-opacity=".9"/><stop offset="1" stop-color="#A3E635" stop-opacity=".15"/></linearGradient>';
+// stage labels
+[['Captain HQ',22],['Intake · parallel',165],['Gaps',300],['Plan',492],['Build · parallel',792],['Review · parallel',925],['QA',1140],['Report',1345],['Close',1445]].forEach(([t,y])=>{const s=el('text',{x:64,y,class:'stage'});s.textContent=t});
+// cache rail
+const rail=el('g',{class:'rail',style:'cursor:pointer'});el('rect',{x:16,y:96,width:8,height:1500,rx:4},rail);
+[215,345,540,840,975,1185,1390].forEach(y=>{el('circle',{cx:20,cy:y,r:6,fill:'#0B1220',stroke:'#A3E635','stroke-width':2.5},rail)});
+const rt=el('text',{x:0,y:0,transform:'translate(40 1250) rotate(-90)',class:'stage',style:'fill:#A3E635'},rail);rt.textContent='Shared cache · every stage reads and writes here';
+rail.addEventListener('click',()=>select('cache'));
+el('path',{d:'M90,70 C40,70 20,80 20,100',class:'edge',style:'stroke:#A3E635;opacity:.8'});
+const topOf=n=>[n.x,n.y-H/2],bot=n=>[n.x,n.y+H/2];
+const J={x:500,y:912};
+const eg=el('g');const edgeEls=[];
+E.forEach(([a,b,p,t])=>{
+ const A=a==='J'?J:byId[a],B=b==='J'?J:byId[b];let d,cls='edge';
+ if(t==='h'){d=`M${A.x-A.w/2},${A.y} L${B.x+B.w/2},${B.y}`}
+ else if(t==='hadv'){d=`M${A.x-A.w/2},${A.y} L${B.x+B.w/2},${B.y}`;cls+=' adv'}
+ else if(t==='loop1'){d=`M${A.x-A.w/2},${A.y} C120,${A.y} 110,${B.y} ${B.x-B.w/2},${B.y}`;cls+=' loop'}
+ else if(t==='loop2'){d=`M${A.x-A.w/2},${A.y} C55,${A.y} 50,${B.y-20} ${B.x-B.w/2},${B.y-12}`;cls+=' loop'}
+ else if(t==='bypass'){d=`M${A.x+A.w/2},${A.y} C880,${A.y} 880,${B.y} ${B.x+B.w/2},${B.y}`}
+ else if(t==='gitg3'){d=`M${A.x+A.w/2},${A.y} Q975,${A.y} 975,130 L975,${B.y-20} Q975,${B.y} 955,${B.y} L${B.x+B.w/2},${B.y}`;cls+=' adv'}
+ else if(t==='gitdone'){d=`M975,${byId.g3.y} L975,${B.y-20} Q975,${B.y} 955,${B.y} L${B.x+B.w/2},${B.y}`;cls+=' adv'}
+ else{const s=a==='J'?[J.x,J.y]:bot(A),e=b==='J'?[J.x,J.y]:topOf(B);const m=(s[1]+e[1])/2;d=`M${s[0]},${s[1]} C${s[0]},${m} ${e[0]},${m} ${e[0]},${e[1]}`}
+ const pe=el('path',{d,class:cls},eg);pe.dataset.p=p;pe.dataset.a=a;pe.dataset.b=b;edgeEls.push(pe);
+});
+const loopLbl=el('text',{x:150,y:1150,class:'stage',style:'fill:#A78BFA'});loopLbl.textContent='↻ fix loops back to devs';
+// nodes
+const nodeEls={};
+N.forEach(n=>{
+ const g=el('g',{class:'node'+(n.gate?' gate':''),tabindex:0,role:'button','aria-label':n.name});
+ const col=n.gate?'#FBBF24':n.end?'#A3E635':G[n.g][1];
+ el('rect',{class:'box',x:n.x-n.w/2,y:n.y-H/2,width:n.w,height:H,rx:n.gate||n.end?26:13,stroke:col,...(n.end?{fill:'rgba(163,230,53,.10)'}:{})},g);
+ if(!n.gate&&!n.end){el('rect',{x:n.x-n.w/2,y:n.y-H/2+10,width:4,height:H-20,rx:2,fill:col},g)}
+ const t1=el('text',{x:n.x,y:n.y-3,'text-anchor':'middle',class:'nm'},g);t1.textContent=(n.gate?'✋ ':'')+n.name;
+ const t2=el('text',{x:n.x,y:n.y+15,'text-anchor':'middle',class:'gp'},g);t2.textContent=n.gate?n.title:n.end?'Owner':G[n.g][0];
+ if(n.end){t2.setAttribute('style','fill:#BEF264')}
+ g.addEventListener('click',()=>{stopWalk();select(n.id)});
+ g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();stopWalk();select(n.id)}});
+ nodeEls[n.id]=g;
+});
+// path sequences for walk + overview
+const SEQ={
+ feature:[['captain','Captain classifies the request as a feature'],['cache','Cache Keeper opens the task cache'],['jira','Intake in parallel: Jira, BRS, Figma and Code Analysts'],['gap','Gap Finder lists conflicts and open questions'],['g1',''],['planner','Dev Planner builds the plan while Jira Drafter drafts subtasks'],['g2',''],['g3',''],['dev1','Flutter Dev 1 and 2 build in parallel, QA Test Writer writes tests'],['pr','PR Reviewer, Security, Localization and Codacy Checker check the diff'],['g4',''],['qalead','QA Lead runs the tests'],['g5',''],['rep','QA Reporter writes the final report'],['upd','Jira Updater drafts the status update'],['g6',''],['done','Owner commits and ships']],
+ bug:[['captain','Captain classifies the request as a bug'],['cache','Cache Keeper opens the task cache'],['sentry','Intake in parallel: Sentry, Firebase, Jira and Code Analysts'],['gap','Gap Finder confirms the root cause and open questions'],['g1',''],['planner','Dev Planner plans the smallest fix'],['g2',''],['g3',''],['dev1','Flutter Dev 1 fixes, QA Test Writer writes a test that reproduces the bug'],['pr','Review bots check the diff in parallel'],['g4',''],['qalead','QA Lead verifies the fix'],['g5',''],['upd','Jira Updater drafts the status update'],['g6',''],['done','Owner commits and ships']]
+};
+let mode='feature',sel=null;
+const inMode=p=>mode==='all'||p.includes(mode[0]);
+function applyMode(){
+ N.forEach(n=>nodeEls[n.id].classList.toggle('dim',!inMode(n.p)));
+ edgeEls.forEach(e=>{const ok=inMode(e.dataset.p);e.classList.toggle('dim',!ok);e.classList.toggle('on',ok&&mode!=='all');e.classList.remove('f','b');if(mode!=='all')e.classList.add(mode[0])});
+ document.querySelectorAll('.seg button').forEach(b=>b.classList.toggle('on',b.dataset.mode===mode));
+}
+const P=document.getElementById('panel');
+const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+function chips(p){return (p.includes('f')?'<span class="chip f">Feature path</span>':'')+(p.includes('b')?'<span class="chip b">Bug path</span>':'')}
+function overview(){
+ const m=mode==='all'?'feature':mode;const s=SEQ[m];
+ P.innerHTML=`<div class="pk">${mode==='all'?'All bots':m==='feature'?'✨ Feature path':'🐞 Bug path'}</div><h2>${mode==='all'?'The whole team':m==='feature'?'From request to shipped feature':'From bug report to verified fix'}</h2>
+ <p class="tt">${mode==='all'?'Showing every bot. Pick a path above to see the order of work. Steps below follow the feature path.':'Click a step or any bot in the map for details.'}</p>
+ <div class="sec"><h3>Steps</h3><ol class="steps">${s.map(([id,t])=>{const n=byId[id];return `<li class="${n.gate?'gt':''}" data-id="${id}">${esc(n.gate?n.title+': '+n.name:t)}</li>`}).join('')}</ol></div>
+ <div class="sec"><h3>Why it matters</h3><p>Bots do the reading, building and checking. People make every decision that matters: answers, plans, what gets fixed, the quality verdict and anything posted to Jira.</p></div>`;
+ P.querySelectorAll('.steps li').forEach(li=>li.onclick=()=>{stopWalk();select(li.dataset.id)});
+}
+function select(id){
+ if(sel)nodeEls[sel].classList.remove('sel');sel=id;if(!id){overview();return}
+ nodeEls[id].classList.add('sel');const n=byId[id];
+ const next=[...new Set(E.filter(e=>e[0]===id&&e[1]!=='J'&&inMode(e[2])).map(e=>e[1]).concat(E.filter(e=>e[0]==='J'&&['dev1','dev2','qaw'].includes(id)&&inMode(e[2])).map(e=>e[1])))];
+ P.innerHTML=`<div class="pk">${n.gate?'✋ Human approval gate':n.end?'Finish':G[n.g][0]}</div><h2>${esc(n.name)}</h2><p class="tt">${esc(n.title)}</p>
+ <div class="chips">${chips(n.p)}${n.gate?'<span class="chip g">Owner decides</span>':''}${/optional/i.test(n.title+n.when)?'<span class="chip n">Optional</span>':''}</div>
+ <div class="sec"><h3>${n.gate?'What happens':'Role'}</h3><p>${esc(n.role)}</p></div>
+ <div class="sec"><h3>Inputs</h3><ul>${n.in.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>
+ <div class="sec"><h3>Outputs</h3><ul>${n.out.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>
+ <div class="sec"><h3>When it runs</h3><p>${esc(n.when)}</p></div>
+ ${n.never?`<div class="sec never"><h3>Never does</h3><p>${esc(n.never)}</p></div>`:''}
+ ${next.length?`<div class="sec"><h3>Hands off to</h3><div class="handoff">${next.map(x=>`<button data-id="${x}">${esc(byId[x].name)}</button>`).join('')}</div></div>`:''}
+ <div class="sec"><div class="handoff"><button data-id="">← Back to path overview</button></div></div>`;
+ P.querySelectorAll('.handoff button').forEach(b=>b.onclick=()=>{stopWalk();select(b.dataset.id||null)});
+}
+let timer=null;const wb=document.getElementById('walk');
+function stopWalk(){if(timer){clearInterval(timer);timer=null;wb.textContent='▶ Walk through the path';wb.classList.remove('stop')}}
+wb.onclick=()=>{if(timer){stopWalk();return}if(mode==='all'){mode='feature';applyMode()}const s=SEQ[mode];let i=0;select(s[0][0]);
+ wb.textContent='■ Stop';wb.classList.add('stop');timer=setInterval(()=>{i++;if(i>=s.length){stopWalk();return}select(s[i][0]);nodeEls[s[i][0]].scrollIntoView({block:'nearest',behavior:'smooth'})},2200)};
+document.querySelectorAll('.seg button').forEach(b=>b.onclick=()=>{stopWalk();mode=b.dataset.mode;applyMode();if(sel&&!inMode(byId[sel].p))sel&&nodeEls[sel].classList.remove('sel'),sel=null;sel?select(sel):overview()});
+// deep link: #mode=bug&node=sentry
+const h=new URLSearchParams(location.hash.slice(1));if(['feature','bug','all'].includes(h.get('mode')))mode=h.get('mode');
+applyMode();h.get('node')&&byId[h.get('node')]?select(h.get('node')):overview();
+</script>
+</body></html>

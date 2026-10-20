@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QA Final Report</title>
+<!--
+  QA FINAL REPORT TEMPLATE (sample data). Edit the JSON config block.
+  QA Reporter: edit ONLY the JSON in <script id="qa-config">. Layout is fixed.
+  Images/video: put files next to this HTML and set relative paths.
+  NEVER put test account numbers, OTP or PIN anywhere in this file or screenshots.
+-->
+<!-- devices: QA Reporter fills the top-level "devices" array from project/devices.md plus the devices used in the run. Any count. -->
+<script type="application/json" id="qa-config">
+{
+ "app": "&lt;App-Name&gt;",
+ "eyebrow": "APP · QA FINAL REPORT",
+ "title": "EXAMPLE Sample screen rebuild",
+ "titleAccent": "EXAMPLE 94% of elements within 2 dp",
+ "intro": "EXAMPLE: Release APK tested on 5 devices against the EN Figma (390x844). Translations checked for all app languages.",
+ "version": "EXAMPLE v1.0 · 16 October 2026 · <JIRA-KEY>",
+ "sections": {
+  "overview": true,
+  "summary": true,
+  "scorecard": true,
+  "pixel": true,
+  "translations": true,
+  "devices": true,
+  "testcases": true,
+  "errorflows": true,
+  "failures": true,
+  "uiperf": true,
+  "performance": true,
+  "api": true,
+  "video": true,
+  "signoff": true
+ },
+ "overview": {
+  "jiraKey": "EXAMPLE <JIRA-KEY>",
+  "build": "EXAMPLE 3.2.1 (321) release APK",
+  "date": "EXAMPLE 16 Oct 2026",
+  "figmaFrame": "390x844 dp",
+  "figmaLink": "EXAMPLE EN Figma link"
+ },
+ "scorecard": {
+  "_formula": "Each card: score 0-100 = average of its inputs' sub-scores (each sub-score 100 if target met, 70 if within 20% of target, 40 otherwise). If score is null it is computed from inputs[].sub. Grade: A>=90, B>=80, C>=70, D>=60, E>=50, F<50. Status: pass>=80, warn 60-79, fail<60. Overall = weighted average using weights (sum 1.0).",
+  "weights": {
+   "app": 0.25,
+   "ui": 0.25,
+   "api": 0.25,
+   "func": 0.25
+  },
+  "cards": [
+   {
+    "key": "app",
+    "title": "Overall app performance",
+    "score": 84,
+    "note": "EXAMPLE Cold start slow on low-spec device, no crashes or ANRs",
+    "inputs": [
+     {
+      "name": "Startup time",
+      "value": "1.6 s avg, 2.4 s worst",
+      "sub": 70
+     },
+     {
+      "name": "Memory",
+      "value": "peak 142 MB",
+      "sub": 100
+     },
+     {
+      "name": "CPU",
+      "value": "peak 64%",
+      "sub": 100
+     },
+     {
+      "name": "Crash / ANR",
+      "value": "0 / 0",
+      "sub": 100
+     },
+     {
+      "name": "Device quality (all devices)",
+      "value": "avg 90/100",
+      "sub": 90
+     }
+    ]
+   },
+   {
+    "key": "ui",
+    "title": "UI-level performance",
+    "score": 78,
+    "note": "EXAMPLE 2 screens drop frames on small devices",
+    "inputs": [
+     {
+      "name": "Avg FPS",
+      "value": "57",
+      "sub": 100
+     },
+     {
+      "name": "Janky frames",
+      "value": "4.1%",
+      "sub": 70
+     },
+     {
+      "name": "First render",
+      "value": "420 ms p95",
+      "sub": 70
+     },
+     {
+      "name": "Rebuilds",
+      "value": "2 screens over budget",
+      "sub": 70
+     }
+    ]
+   },
+   {
+    "key": "api",
+    "title": "API and integration",
+    "score": 82,
+    "note": "EXAMPLE 1 timeout recovered by retry, 1 analytics call lost",
+    "inputs": [
+     {
+      "name": "Latency p50 / p95",
+      "value": "265 / 615 ms",
+      "sub": 100
+     },
+     {
+      "name": "Error rate",
+      "value": "1.8%",
+      "sub": 70
+     },
+     {
+      "name": "Failed in success flow",
+      "value": "2",
+      "sub": 70
+     },
+     {
+      "name": "Recovered",
+      "value": "1 of 2",
+      "sub": 70
+     }
+    ]
+   },
+   {
+    "key": "func",
+    "title": "Functionality",
+    "score": 91,
+    "note": "EXAMPLE All core flows pass, 1 minor defect open",
+    "inputs": [
+     {
+      "name": "Functional pass rate",
+      "value": "95%",
+      "sub": 100
+     },
+     {
+      "name": "Error flows handled",
+      "value": "5 of 6",
+      "sub": 70
+     },
+     {
+      "name": "Open defects",
+      "value": "0 high, 0 medium, 1 low",
+      "sub": 100
+     }
+    ]
+   }
+  ],
+  "overall": {
+   "score": null,
+   "verdict": null,
+   "text": "EXAMPLE Ready to release after the cold start and jank fixes are verified."
+  }
+ },
+ "_devicesNote": "QA Reporter fills devices from project/devices.md plus every device actually used in this run (any count). Cover, overview and device matrix columns all render from this one array. deviceMatrix results are keyed by device name; a missing key shows N/A.",
+ "devices": [
+  {
+   "name": "Device A",
+   "id": "real device",
+   "size": "384x853 dp",
+   "role": "Device"
+  },
+  {
+   "name": "Emulator B",
+   "id": "emulator-5554",
+   "size": "411x923 dp",
+   "role": "Normal"
+  },
+  {
+   "name": "qa-small",
+   "id": "emulator",
+   "size": "360x640 dp",
+   "role": "Safety"
+  },
+  {
+   "name": "qa-large",
+   "id": "emulator",
+   "size": "430x932 dp",
+   "role": "Safety"
+  },
+  {
+   "name": "qa-figma",
+   "id": "emulator",
+   "size": "390x844 dp",
+   "role": "Pixel check"
+  }
+ ],
+ "summary": {
+  "verdict": "PASS",
+  "headline": "EXAMPLE From 14% to 94% of elements on their Figma position",
+  "text": "EXAMPLE: All flows pass on 5 devices. 2 minor offsets, no major.",
+  "kpis": [
+   {
+    "value": "94%",
+    "label": "elements within 2 dp of Figma",
+    "hl": true
+   },
+   {
+    "value": "96%",
+    "label": "elements with correct spacing",
+    "hl": true
+   },
+   {
+    "value": "12/12",
+    "label": "test cases passed"
+   },
+   {
+    "value": "7/7",
+    "label": "error flows handled"
+   },
+   {
+    "value": "0",
+    "label": "major failures"
+   }
+  ]
+ },
+ "pixel": {
+  "rule": "Within 2 dp = aligned, up to 6 dp = minor, beyond = major. Graded on qa-figma (390x844).",
+  "screens": [
+   {
+    "name": "EXAMPLE Item list",
+    "group": "F1 · SAMPLE FEATURE",
+    "figmaImg": "",
+    "appImg": "",
+    "within2": "95%",
+    "spacing": "97%",
+    "shift": "+0 dp",
+    "measured": 18,
+    "minor": 1,
+    "major": 0,
+    "grade": "aligned",
+    "elements": [
+     {
+      "element": "Filter chip",
+      "property": "x",
+      "expected": "16 dp",
+      "actual": "18 dp",
+      "diff": "+2 dp",
+      "grade": "aligned"
+     },
+     {
+      "element": "Title text",
+      "property": "font",
+      "expected": "Inter 20/28 Bold",
+      "actual": "Inter 20/28 Bold",
+      "diff": "0",
+      "grade": "aligned"
+     },
+     {
+      "element": "Row divider",
+      "property": "color",
+      "expected": "#E8F3FE",
+      "actual": "#E8F3FE",
+      "diff": "0",
+      "grade": "aligned"
+     },
+     {
+      "element": "List row",
+      "property": "spacing",
+      "expected": "12 dp",
+      "actual": "14 dp",
+      "diff": "+2 dp",
+      "grade": "aligned"
+     }
+    ]
+   },
+   {
+    "name": "EXAMPLE Item detail",
+    "group": "F1 · SAMPLE FEATURE",
+    "figmaImg": "",
+    "appImg": "",
+    "within2": "88%",
+    "spacing": "92%",
+    "shift": "+1 dp",
+    "measured": 14,
+    "minor": 3,
+    "major": 1,
+    "grade": "minor",
+    "elements": [
+     {
+      "element": "Amount label",
+      "property": "y",
+      "expected": "212 dp",
+      "actual": "219 dp",
+      "diff": "+7 dp",
+      "grade": "major"
+     },
+     {
+      "element": "Share button",
+      "property": "x",
+      "expected": "300 dp",
+      "actual": "303 dp",
+      "diff": "+3 dp",
+      "grade": "minor"
+     },
+     {
+      "element": "Status chip",
+      "property": "width",
+      "expected": "72 dp",
+      "actual": "76 dp",
+      "diff": "+4 dp",
+      "grade": "minor"
+     },
+     {
+      "element": "Amount label",
+      "property": "color",
+      "expected": "#00377D",
+      "actual": "#00377D",
+      "diff": "0",
+      "grade": "aligned"
+     }
+    ]
+   }
+  ]
+ },
+ "uiPerf": {
+  "_note": "One row per screen x device. List ONLY failing or warn rows in rows[]. totalScreens = screens measured. Thresholds: FPS >= 55, janky <= 5%, first render <= 400 ms, rebuilds <= budget. imageCacheHit optional (leave empty).",
+  "thresholds": {
+   "fps": 55,
+   "jankyPct": 5,
+   "firstRenderMs": 400
+  },
+  "totalScreens": 12,
+  "rows": [
+   {
+    "screen": "EXAMPLE Item list",
+    "device": "qa-small",
+    "fps": 49,
+    "jankyPct": "8.2%",
+    "firstRenderMs": 520,
+    "rebuilds": "14 (budget 6)",
+    "imageCacheHit": "71%",
+    "status": "fail"
+   },
+   {
+    "screen": "EXAMPLE Item detail",
+    "device": "qa-small",
+    "fps": 54,
+    "jankyPct": "5.6%",
+    "firstRenderMs": 430,
+    "rebuilds": "5 (budget 6)",
+    "imageCacheHit": "",
+    "status": "warn"
+   }
+  ]
+ },
+ "translations": {
+  "_note": "List ONLY failing keys. lang: any app language code. issue: wrong | missing | truncated | overflow. totalKeys = all keys checked.",
+  "totalKeys": 48,
+  "failed": [
+   {
+    "key": "EXAMPLE sample_empty",
+    "lang": "L2",
+    "expected": "Sample expected text",
+    "actual": "Sample",
+    "issue": "truncated"
+   },
+   {
+    "key": "EXAMPLE sample_filter",
+    "lang": "L1",
+    "expected": "Sample expected label",
+    "actual": "Sample wrong label",
+    "issue": "wrong"
+   }
+  ]
+ },
+ "deviceMatrix": {
+  "rows": [
+   {
+    "check": "EXAMPLE No overflow",
+    "results": {
+     "Device A": "PASS",
+     "Emulator B": "PASS",
+     "qa-small": "PASS",
+     "qa-large": "PASS",
+     "qa-figma": "PASS"
+    }
+   },
+   {
+    "check": "EXAMPLE Text not clipped (L1)",
+    "results": {
+     "Device A": "PASS",
+     "Emulator B": "PASS",
+     "qa-small": "FAIL",
+     "qa-large": "PASS",
+     "qa-figma": "PASS"
+    }
+   }
+  ]
+ },
+ "testcases": {
+  "rows": [
+   {
+    "id": "TC-01",
+    "title": "EXAMPLE Open item list",
+    "steps": "Login, tap Items",
+    "expected": "List loads under 2 s",
+    "result": "PASS"
+   },
+   {
+    "id": "TC-02",
+    "title": "EXAMPLE Sample wrong label",
+    "steps": "Tap filter, pick range",
+    "expected": "Only matching rows",
+    "result": "PASS"
+   }
+  ]
+ },
+ "errorflows": {
+  "note": "Each error scenario is forced on qa-figma (and checked on qa-small). Wrong PIN is tried only once per number.",
+  "items": [
+   {
+    "name": "API failure (500)",
+    "how": "EXAMPLE Mock server returns 500",
+    "expected": "Error banner with Retry, no crash, AppLog.event logged",
+    "actual": "EXAMPLE As expected",
+    "figmaImg": "",
+    "appImg": "",
+    "status": "PASS"
+   },
+   {
+    "name": "No internet",
+    "how": "EXAMPLE adb shell svc wifi/data disable",
+    "expected": "Offline screen, cached data shown",
+    "actual": "EXAMPLE As expected",
+    "figmaImg": "",
+    "appImg": "",
+    "status": "PASS"
+   },
+   {
+    "name": "Timeout",
+    "how": "EXAMPLE Throttle network, 30 s delay",
+    "expected": "Timeout message, Retry works",
+    "actual": "EXAMPLE Spinner shows 45 s before message",
+    "figmaImg": "",
+    "appImg": "",
+    "status": "FAIL"
+   },
+   {
+    "name": "Invalid input",
+    "how": "EXAMPLE Enter letters in amount",
+    "expected": "Inline validation text in all 4 languages",
+    "actual": "EXAMPLE As expected",
+    "figmaImg": "",
+    "appImg": "",
+    "status": "PASS"
+   },
+   {
+    "name": "Empty state",
+    "how": "EXAMPLE Account with no items",
+    "expected": "Empty illustration + localized text",
+    "actual": "EXAMPLE As expected",
+    "figmaImg": "",
+    "appImg": "",
+    "status": "PASS"
+   },
+   {
+    "name": "Session expiry",
+    "how": "EXAMPLE Expire token on server",
+    "expected": "Redirect to login with message",
+    "actual": "EXAMPLE As expected",
+    "figmaImg": "",
+    "appImg": "",
+    "status": "PASS"
+   },
+   {
+    "name": "Wrong PIN (once)",
+    "how": "EXAMPLE One wrong PIN entry",
+    "expected": "Error text, attempts left shown, no lock",
+    "actual": "EXAMPLE As expected",
+    "figmaImg": "",
+    "appImg": "",
+    "status": "PASS"
+   }
+  ]
+ },
+ "failures": {
+  "rows": [
+   {
+    "id": "F-01",
+    "severity": "Major",
+    "screen": "EXAMPLE Item detail",
+    "issue": "Amount label 7 dp lower than Figma",
+    "device": "qa-figma",
+    "img": ""
+   }
+  ]
+ },
+ "performance": {
+  "_note": "Any device. Fill spec from adb (getprop, /proc/meminfo, df). verdict/status: pass | warn | fail.",
+  "device": {
+   "name": "qa-small",
+   "model": "Android emulator (low-spec profile)",
+   "ram": "2 GB",
+   "storage": "8 GB total · 3.1 GB free",
+   "android": "Android 11 (API 30)",
+   "cpu": "4 cores x86_64"
+  },
+  "score": "86/100",
+  "verdict": "pass",
+  "verdictText": "EXAMPLE Smooth on low-spec device. Minor jank on first scroll.",
+  "metrics": [
+   {
+    "name": "Avg frame rate",
+    "value": "58 fps",
+    "target": ">= 55 fps",
+    "status": "pass"
+   },
+   {
+    "name": "Janky frames",
+    "value": "2",
+    "target": "<= 5",
+    "status": "pass"
+   },
+   {
+    "name": "Peak memory",
+    "value": "142 MB",
+    "target": "<= 200 MB",
+    "status": "pass"
+   },
+   {
+    "name": "Avg memory",
+    "value": "118 MB",
+    "target": "<= 160 MB",
+    "status": "pass"
+   },
+   {
+    "name": "Cold start",
+    "value": "2.4 s",
+    "target": "<= 2.0 s",
+    "status": "warn"
+   },
+   {
+    "name": "App size installed",
+    "value": "96 MB",
+    "target": "<= 120 MB",
+    "status": "pass"
+   },
+   {
+    "name": "CPU peak",
+    "value": "64%",
+    "target": "<= 80%",
+    "status": "pass"
+   },
+   {
+    "name": "ANRs / crashes",
+    "value": "0 / 0",
+    "target": "0 / 0",
+    "status": "pass"
+   }
+  ],
+  "_allDevicesNote": "perDevice: one row per tested device. overallScore = average of perDevice scores (or set it). The spec card shows the lowest-spec device.",
+  "perDevice": [
+   {
+    "device": "Device A",
+    "score": 92,
+    "coldStart": "1.4 s",
+    "peakMem": "131 MB",
+    "cpuPeak": "52%",
+    "fps": 59,
+    "crashes": "0 / 0",
+    "verdict": "pass"
+   },
+   {
+    "device": "Emulator B",
+    "score": 90,
+    "coldStart": "1.2 s",
+    "peakMem": "128 MB",
+    "cpuPeak": "48%",
+    "fps": 60,
+    "crashes": "0 / 0",
+    "verdict": "pass"
+   },
+   {
+    "device": "qa-small",
+    "score": 86,
+    "coldStart": "2.4 s",
+    "peakMem": "142 MB",
+    "cpuPeak": "64%",
+    "fps": 56,
+    "crashes": "0 / 0",
+    "verdict": "pass"
+   },
+   {
+    "device": "qa-large",
+    "score": 91,
+    "coldStart": "1.3 s",
+    "peakMem": "135 MB",
+    "cpuPeak": "50%",
+    "fps": 60,
+    "crashes": "0 / 0",
+    "verdict": "pass"
+   },
+   {
+    "device": "qa-figma",
+    "score": 89,
+    "coldStart": "1.5 s",
+    "peakMem": "130 MB",
+    "cpuPeak": "55%",
+    "fps": 58,
+    "crashes": "0 / 0",
+    "verdict": "pass"
+   }
+  ],
+  "overallScore": null
+ },
+ "api": {
+  "rows": [
+   {
+    "endpoint": "EXAMPLE GET /items",
+    "p50": "320 ms",
+    "p95": "780 ms",
+    "status": "PASS"
+   },
+   {
+    "endpoint": "EXAMPLE GET /config",
+    "p50": "210 ms",
+    "p95": "450 ms",
+    "status": "PASS"
+   }
+  ],
+  "_failedNote": "Every request that failed during the SUCCESS flow (even if retried and recovered). Empty array = green 'No failed requests'. impact: low | medium | high.",
+  "failed": [
+   {
+    "endpoint": "EXAMPLE GET /profile",
+    "method": "GET",
+    "status": "504",
+    "error": "Gateway timeout",
+    "latency": "30.0 s",
+    "device": "qa-small",
+    "recovered": true,
+    "impact": "medium"
+   },
+   {
+    "endpoint": "EXAMPLE POST /analytics/event",
+    "method": "POST",
+    "status": "0",
+    "error": "Connection reset",
+    "latency": "1.2 s",
+    "device": "Emulator B",
+    "recovered": false,
+    "impact": "low"
+   }
+  ]
+ },
+ "video": {
+  "src": "",
+  "caption": "EXAMPLE Success flow, screen-recorded on qa-figma"
+ },
+ "signoff": {
+  "qa": "EXAMPLE QA Lead bot",
+  "date": "EXAMPLE 16 Oct 2026",
+  "decision": "EXAMPLE Ready for release after F-01 fix"
+ }
+}
+</script>
+<style>
+:root{--navy:#00377d;--bg:#f4f7fc;--light:#e8f3fe;--line:#d5deec;--muted:#557aa9;--yellow:#ffd100;--green:#1e9e57;--red:#d6343a;--amber:#e39b00;--text:#1b2a44}
+@page{size:A4 landscape;margin:0}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif;font-size:11px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.panel{position:sticky;top:0;z-index:9;background:#fff;border-bottom:2px solid var(--navy);padding:10px 24px;display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center}
+.panel b{color:var(--navy)} .panel label{white-space:nowrap}
+.panel button{background:var(--navy);color:#fff;border:0;border-radius:6px;padding:7px 14px;font-weight:700;cursor:pointer}
+.panel .hint{width:100%;color:var(--muted);font-size:10px}
+.cover{background:var(--navy);color:#fff;min-height:210mm;padding:22mm 18mm 14mm;display:flex;flex-direction:column;break-after:page}
+.logo{font-size:52px;font-weight:900;font-style:italic;color:var(--yellow);letter-spacing:-1px}
+.logo small{display:inline-block;font-size:14px;font-style:normal;color:var(--yellow);margin-left:6px}
+.eyebrow{color:var(--yellow);font-weight:700;font-size:12px;letter-spacing:.5px;text-transform:uppercase;margin-top:auto}
+.cover h1{font-size:45px;font-style:italic;font-weight:700;margin:8px 0 0;line-height:1.1}
+.cover h1 span{display:block;color:var(--yellow)}
+.cover p.intro{font-size:15.5px;max-width:170mm;line-height:1.5;opacity:.95}
+.cover .meta{margin-top:auto;font-size:11px;color:#9fb6d6}
+.cover .devs{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.cover .devs div{border:1px solid #3a63a0;border-radius:8px;padding:7px 12px;font-size:12px}
+.cover .devs div b{color:var(--yellow)}
+main{padding:12mm 14mm 4mm}
+section{margin-bottom:9mm}
+.sec-eyebrow{break-after:avoid;color:var(--muted);font-weight:700;font-size:9px;text-transform:uppercase;letter-spacing:.5px}
+h2{color:var(--navy);font-style:italic;font-size:24px;margin:3px 0 6px;display:flex;align-items:center;gap:10px;break-after:avoid}
+h2 .pill{margin-left:auto;font-style:normal}
+h3{color:var(--navy);font-size:15px;font-style:italic;margin:0 0 6px}
+p.lead{font-size:12px;margin:0 0 10px;line-height:1.5}
+.kpis{display:flex;gap:10px;margin:10px 0 12px;break-inside:avoid}
+.kpi{flex:1;background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 14px;min-height:62px}
+.kpi .v{font-size:20px;font-weight:700;color:var(--navy)}
+.kpi .l{font-size:9.5px;margin-top:4px;color:var(--text)}
+.kpi.hl{background:var(--navy);border-color:var(--navy)} .kpi.hl .v{color:var(--yellow)} .kpi.hl .l{color:#fff}
+table{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border-radius:8px;overflow:hidden;font-size:10px;break-inside:auto}
+thead th{background:var(--navy);color:#fff;text-align:left;padding:7px 10px;font-weight:700}
+td{padding:6px 10px;border-top:1px solid #eef2f8}
+tbody tr:nth-child(even) td{background:var(--light)}
+tr{break-inside:avoid}
+.ok{color:var(--green);font-weight:700}.bad{color:var(--red);font-weight:700}.warn{color:var(--amber);font-weight:700}
+.pill{display:inline-block;border-radius:20px;padding:3px 10px;font-size:9px;font-weight:700;color:#fff;text-transform:uppercase}
+.p-pass,.p-aligned{background:var(--green)}.p-fail,.p-major{background:var(--red)}.p-minor,.p-warn,.p-medium,.p-wrong,.p-truncated,.p-overflow{background:var(--amber)}.p-high,.p-missing{background:var(--red)}.p-low{background:var(--muted)}
+.okline{background:#fff;border:1px solid var(--line);border-left:4px solid var(--green);border-radius:8px;padding:9px 12px;color:var(--green);font-weight:700;margin-top:8px}
+h3.sub{margin-top:12px}
+.card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 14px;break-inside:avoid;margin-bottom:10px}
+.cmp{display:grid;grid-template-columns:1fr 1fr 1.15fr;gap:12px;break-inside:avoid;margin-bottom:12px}
+.shot{background:var(--light);border-radius:10px;padding:10px;display:flex;flex-direction:column;align-items:center}
+.shot img{max-width:100%;max-height:118mm;border-radius:6px}
+.slot{width:62%;aspect-ratio:390/844;max-height:110mm;border:2px dashed #9fb6d6;border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:9px;text-align:center;background:#f7faff}
+.cap{font-size:9px;color:var(--muted);margin-top:6px;align-self:flex-start}
+.side{background:var(--light);border-radius:10px;padding:10px}
+.side .kpis{margin:0 0 8px}.side .kpi{padding:8px}.side .kpi .v{font-size:17px}
+.side h4{color:var(--muted);font-size:9px;text-transform:uppercase;margin:8px 0 4px}
+.side ul{margin:0;padding-left:14px;line-height:1.6}
+.ef{display:grid;grid-template-columns:1.3fr .6fr .6fr;gap:12px;break-inside:avoid;margin-bottom:12px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px}
+.ef .slot{width:100%;max-height:52mm;aspect-ratio:auto;height:52mm}
+.ef dl{margin:6px 0 0;display:grid;grid-template-columns:70px 1fr;gap:4px 8px;font-size:10px}
+.ef dt{color:var(--muted);font-weight:700}
+.ef .shot{padding:6px}
+.note{font-size:10px;font-style:italic;color:var(--muted);margin-top:8px}
+.foot{display:flex;justify-content:space-between;color:var(--muted);font-size:9px;padding:4mm 14mm 6mm;border-top:1px solid var(--line);margin:0 14mm}
+.hidden{display:none!important}
+table.mini{font-size:8.5px;border-radius:6px}table.mini th{padding:4px 6px;font-size:8.5px}table.mini td{padding:3px 6px}table.mini .pill{font-size:7.5px;padding:2px 6px}
+
+.p-pass,.p-low{}
+.okline2{background:#fff;border:1px solid var(--line);border-left:4px solid var(--green);border-radius:8px;padding:9px 12px;color:var(--green);font-weight:700;margin-top:8px}
+.pf{display:grid;grid-template-columns:1fr 1.6fr;gap:12px;break-inside:avoid}
+.spec dl{margin:6px 0 0;display:grid;grid-template-columns:90px 1fr;gap:5px 8px;font-size:10.5px}.spec dt{color:var(--muted);font-weight:700}
+.score{font-size:30px;font-weight:700;color:var(--yellow)}
+video{max-width:100%;max-height:120mm;border-radius:8px}
+@media print{.panel{display:none} body{background:var(--bg)} main{padding-top:10mm}
+ .foot{position:fixed;bottom:0;left:0;right:0;margin:0;background:var(--bg);padding:3mm 14mm 4mm}
+ main{padding-bottom:14mm}
+ .foot .pg::after{content:""} }
+.sc{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:10px 0}
+.scc{background:#fff;border:1px solid var(--line);border-top:5px solid var(--c);border-radius:10px;padding:12px 14px;break-inside:avoid}
+.scc .t{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase}
+.scc .n{font-size:30px;font-weight:700;color:var(--navy);margin-top:4px}.scc .n small{font-size:12px;color:var(--muted)}
+.scc .g{float:right;width:38px;height:38px;border-radius:50%;background:var(--c);color:#fff;font-size:20px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.scc .nt{font-size:10px;margin:6px 0 8px;min-height:26px}
+.scc ul{list-style:none;margin:0;padding:0;font-size:9px;border-top:1px dashed var(--line)}.scc li{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px dashed #eef2f8}.scc li b{color:var(--text)}
+.verdict{display:flex;align-items:center;gap:16px;background:var(--navy);color:#fff;border-radius:10px;padding:12px 18px;border-left:8px solid var(--yellow)}
+.verdict .n{font-size:30px;font-weight:700;color:var(--yellow)}.verdict .g{font-size:22px;font-weight:700;background:var(--yellow);color:var(--navy);border-radius:8px;padding:2px 12px}
+</style></head>
+<body>
+<div class="panel" id="panel">
+  <b>Show / hide sections:</b><span id="toggles"></span>
+  <button onclick="window.print()">Download as PDF</button>
+  <div class="hint">Choices are saved in this browser. If headers still appear, untick "Headers and footers" in the print dialog (More settings). Turn on "Background graphics" if colors are missing.</div>
+</div>
+<div id="root"></div>
+<script>
+const C=JSON.parse(document.getElementById('qa-config').textContent);
+const KEY='qa-report-sections';const saved=JSON.parse(localStorage.getItem(KEY)||'{}');
+const S=Object.assign({},C.sections,saved);
+const e=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const pill=s=>`<span class="pill p-${e(String(s).toLowerCase())}">${e(s)}</span>`;
+const res=s=>{const u=String(s).toUpperCase();return `<span class="${u==='PASS'?'ok':u==='FAIL'?'bad':'warn'}">${e(s)}</span>`};
+const tbl=(h,rows)=>`<table><thead><tr>${h.map(x=>`<th>${e(x)}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+const shot=(src,cap,label)=>`<div class="shot">${src?`<img src="${e(src)}">`:`<div class="slot">${e(label)}<br>screenshot slot</div>`}<div class="cap">${e(cap)}</div></div>`;
+const kpis=k=>`<div class="kpis">${k.map(x=>`<div class="kpi ${x.hl?"hl":""}" ${x.sm?"style=\"flex:1.6\"":""}><div class="v">${e(x.value)}</div><div class="l">${e(x.label)}</div></div>`).join('')}</div>`;
+const head=(eb,t,extra='')=>`<div class="sec-eyebrow">${e(eb)}</div><h2>${e(t)}${extra}</h2>`;
+const grade=n=>n>=90?'A':n>=80?'B':n>=70?'C':n>=60?'D':n>=50?'E':'F';
+const stat=n=>n>=80?'pass':n>=60?'warn':'fail';
+const scol=n=>n>=80?'var(--green)':n>=60?'var(--amber)':'var(--red)';
+const cardScore=c=>c.score!=null?c.score:Math.round((c.inputs||[]).reduce((a,i)=>a+(+i.sub||0),0)/Math.max(1,(c.inputs||[]).length));
+const O=C.overview;const D=C.devices||[];
+const B={
+overview:()=>`<section>${head('Overview','Test setup')}
+ ${kpis([{value:O.figmaFrame,label:'Figma frame (EN), exact grade device',hl:true},{value:D.length,label:'devices tested'},{value:O.build,label:"build",sm:1},{value:O.jiraKey,label:'Jira'}])}
+ ${tbl(['Device','ID','Size','Role'],D.map(d=>[`<b>${e(d.name)}</b>`,e(d.id),e(d.size),d.role==='Pixel check'?`<span class="ok">${e(d.role)}</span>`:e(d.role)]))}
+ <div class="note">Figma: ${e(O.figmaLink)} · Date: ${e(O.date)}</div></section>`,
+scorecard:()=>{const SC=C.scorecard;if(!SC)return '';const W=SC.weights||{};const cs=SC.cards.map(c=>({...c,s:cardScore(c)}));
+ const ov=SC.overall||{};const tot=ov.score!=null?ov.score:Math.round(cs.reduce((a,c)=>a+c.s*(W[c.key]??1/cs.length),0));const v=ov.verdict||stat(tot);
+ return `<section style="break-inside:avoid">${head('Executive scorecard','Release health at a glance')}
+ <div class="verdict"><div class="n">${tot}<small style="font-size:13px;color:#cfe0ff">/100</small></div><div class="g">${grade(tot)}</div><div><div style="font-weight:700">Overall verdict ${pill(v)}</div><div style="font-size:10.5px;color:#cfe0ff;margin-top:3px">${e(ov.text)}</div></div></div>
+ <div class="sc">${cs.map(c=>`<div class="scc" style="--c:${scol(c.s)}"><div class="g">${grade(c.s)}</div><div class="t">${e(c.title)}</div><div class="n">${c.s}<small>/100</small></div>${pill(stat(c.s))}<div class="nt">${e(c.note)}</div><ul>${(c.inputs||[]).map(i=>`<li><span>${e(i.name)}</span><b>${e(i.value)}</b></li>`).join('')}</ul></div>`).join('')}</div>
+ <div class="note">Score = average of input sub-scores (100 met, 70 near, 40 missed). Grade A 90+, B 80+, C 70+, D 60+, E 50+, F below 50. Overall = weighted average.</div></section>`},
+summary:()=>`<section>${head('Result',C.summary.headline,' '+pill(C.summary.verdict))}<p class="lead">${e(C.summary.text)}</p>${kpis(C.summary.kpis)}</section>`,
+pixel:()=>`<section>${head('Alignment by screen','Measured against Figma')}<p class="lead">${e(C.pixel.rule)}</p>
+ ${tbl(['Screen','Measured','Within 2 dp','Spacing OK','Minor','Major','Screen shift','Grade'],C.pixel.screens.map(s=>[e(s.name),s.measured,`<span class="ok">${e(s.within2)}</span>`,`<span class="ok">${e(s.spacing)}</span>`,s.minor,s.major?`<span class="bad">${s.major}</span>`:0,e(s.shift),pill(s.grade)]))}</section>
+ ${C.pixel.screens.map(s=>`<section style="break-inside:avoid">${head(s.group,s.name,' '+pill(s.grade))}<div class="cmp">${shot(s.figmaImg,'Figma (EN)','Figma')}${shot(s.appImg,'App with measured elements','App')}
+ <div class="side">${kpis([{value:s.within2,label:'within 2 dp'},{value:s.spacing,label:'spacing OK'},{value:s.shift,label:'screen shift'}])}
+ <div>${s.measured} measured · ${s.major} major · ${s.minor} minor</div>${(()=>{const E=s.elements||[];if(!E.length&&s.measured==null)return '';const bad=E.filter(x=>x.grade==='minor'||x.grade==='major');const n=(s.measured??E.length)-bad.length;return `<h4>Element check</h4>${bad.length?`<table class="mini"><thead><tr><th>Element · property</th><th>Figma</th><th>App</th><th>Diff</th><th></th></tr></thead><tbody>${bad.map(x=>`<tr><td><b>${e(x.element)}</b> · ${e(x.property)}</td><td>${e(x.expected)}</td><td>${e(x.actual)}</td><td class="${x.grade==='major'?'bad':'warn'}">${e(x.diff)}</td><td>${pill(x.grade)}</td></tr>`).join('')}</tbody></table>`:''}<div class="okline2" style="font-size:9.5px;padding:6px 10px;margin-top:6px">&#10003; All remaining UI elements aligned (${n})</div>`})()}</div></div></section>`).join('')}`,
+translations:()=>{const T=C.translations,F=T.failed||[],keys=new Set(F.map(f=>f.key)),rest=(T.totalKeys||0)-keys.size;
+ return `<section>${head('Localization','Translations vs Figma')}${kpis([{value:F.length,label:'failing key/language pairs',hl:true},{value:keys.size,label:'keys with issues'},{value:T.totalKeys,label:'keys checked'}])}
+ ${F.length?tbl(['Key','Language','Expected (Figma)','Actual (app)','Issue'],F.map(f=>[`<b>${e(f.key)}</b>`,`<b>${e(f.lang)}</b>`,e(f.expected),`<span class="bad">${e(f.actual)}</span>`,pill(f.issue)])):''}
+ <div class="okline2">&#10003; All ${F.length?'remaining ':''}${rest} keys PASS in all languages</div></section>`},
+devices:()=>`<section>${head('Safety checks','Device matrix')}${tbl(['Check',...D.map(d=>d.name)],C.deviceMatrix.rows.map(r=>[e(r.check),...D.map(d=>r.results&&r.results[d.name]!=null?res(r.results[d.name]):'<span class="warn">N/A</span>')]))}</section>`,
+testcases:()=>`<section>${head('Functional','Test cases')}${tbl(['ID','Title','Steps','Expected','Result'],C.testcases.rows.map(r=>[`<b>${e(r.id)}</b>`,e(r.title),e(r.steps),e(r.expected),res(r.result)]))}</section>`,
+errorflows:()=>{const it=C.errorflows.items;const p=it.filter(i=>i.status==='PASS').length;
+ return `<section>${head('Error flows','Error and edge scenarios')}<p class="lead">${e(C.errorflows.note)}</p>
+ ${kpis([{value:p+'/'+it.length,label:'error flows handled',hl:true},{value:it.length-p,label:'error flows failing'}])}
+ ${tbl(['Scenario','Expected','Actual','Status'],it.map(i=>[`<b>${e(i.name)}</b>`,e(i.expected),e(i.actual),pill(i.status)]))}</section>
+ <section>${it.map((i,n)=>`<div class="ef"><div><div class="sec-eyebrow">E${n+1} · Error flow</div><h3>${e(i.name)} ${pill(i.status)}</h3>
+ <dl><dt>How</dt><dd>${e(i.how)}</dd><dt>Expected</dt><dd>${e(i.expected)}</dd><dt>Actual</dt><dd class="${i.status==='PASS'?'':'bad'}">${e(i.actual)}</dd></dl></div>
+ ${shot(i.figmaImg,'Figma error state','Figma')}${shot(i.appImg,'App error state','App')}</div>`).join('')}</section>`},
+failures:()=>`<section>${head('Defects','Failures')}${tbl(['ID','Severity','Screen','Issue','Device'],C.failures.rows.map(r=>[`<b>${e(r.id)}</b>`,pill(r.severity),e(r.screen),e(r.issue),e(r.device)]))}</section>`,
+uiperf:()=>{const U=C.uiPerf;if(!U)return '';const R=U.rows||[];const T=U.thresholds||{};const scr=new Set(R.map(r=>r.screen));const rest=(U.totalScreens||0)-scr.size;const hasImg=R.some(r=>r.imageCacheHit);
+ return `<section>${head('UI performance','UI performance by screen')}<p class="lead">Targets: FPS ${'>='} ${e(T.fps)}, janky frames ${'<='} ${e(T.jankyPct)}%, first render ${'<='} ${e(T.firstRenderMs)} ms, rebuilds within budget. Only failing or warning screen x device rows are listed.</p>
+ ${kpis([{value:R.length,label:'failing screen x device rows',hl:true},{value:scr.size,label:'screens with issues'},{value:U.totalScreens,label:'screens measured'},{value:D.length,label:'devices'}])}
+ ${R.length?tbl(['Screen','Device','Avg FPS','Janky frames','First render / load','Rebuilds',...(hasImg?['Image cache hit']:[]),'Status'],R.map(r=>[`<b>${e(r.screen)}</b>`,e(r.device),`<span class="${r.fps<T.fps?'bad':''}">${e(r.fps)}</span>`,e(r.jankyPct),`<span class="${r.firstRenderMs>T.firstRenderMs?'bad':''}">${e(r.firstRenderMs)} ms</span>`,e(r.rebuilds),...(hasImg?[e(r.imageCacheHit||'-')]:[]),pill(r.status)])):''}
+ <div class="okline2">&#10003; All ${R.length?'remaining ':''}${rest} screens PASS on all devices</div></section>`},
+performance:()=>{const P=C.performance,d=P.device||{},PD=P.perDevice||[];const avg=P.overallScore!=null?P.overallScore:(PD.length?Math.round(PD.reduce((a,x)=>a+(+x.score||0),0)/PD.length):parseInt(P.score));
+ return `<section style="break-inside:avoid">${head('Performance · all devices','App quality across all devices',' '+pill(P.verdict))}<p class="lead">${e(P.verdictText)}</p>
+ <div class="pf"><div class="card spec"><div class="sec-eyebrow">Lowest-spec device</div><h3>${e(d.name)}</h3><dl><dt>Model</dt><dd>${e(d.model)}</dd><dt>RAM</dt><dd>${e(d.ram)}</dd><dt>Storage</dt><dd>${e(d.storage)}</dd><dt>Android</dt><dd>${e(d.android)}</dd><dt>CPU</dt><dd>${e(d.cpu)}</dd></dl></div>
+ <div class="kpi hl" style="display:flex;flex-direction:column;justify-content:center;border-radius:10px"><div class="score">${avg}/100 <span style="font-size:18px">${grade(avg)}</span></div><div class="l">overall app quality score across ${PD.length||1} devices · lowest ${e(d.name)} ${e(P.score)} · verdict ${pill(P.verdict)}</div></div></div>
+ ${PD.length?`<h3 class="sub">Quality score per device</h3>${tbl(['Device','Score','Grade','Cold start','Peak memory','CPU peak','Avg FPS','Crash / ANR','Verdict'],PD.map(x=>[`<b>${e(x.device)}</b>`,`<b>${e(x.score)}</b>/100`,`<b style="color:${scol(x.score)}">${grade(x.score)}</b>`,e(x.coldStart),e(x.peakMem),e(x.cpuPeak),e(x.fps),e(x.crashes),pill(x.verdict)]))}`:''}
+ <h3 class="sub">Detail on ${e(d.name)}</h3>${tbl(['Metric','Value','Target','Status'],(P.metrics||[]).map(m=>[`<b>${e(m.name)}</b>`,e(m.value),e(m.target),pill(m.status)]))}</section>`},
+api:()=>{const F=C.api.failed||[];const rec=F.filter(f=>f.recovered).length;
+ return `<section>${head('Network','API latency')}${tbl(['Endpoint','p50','p95','Status'],C.api.rows.map(r=>[e(r.endpoint),e(r.p50),e(r.p95),res(r.status)]))}
+ <div style="break-inside:avoid"><h3 class="sub">Failed requests during success flow</h3>
+ ${kpis([{value:F.length,label:'failed requests in success flow',hl:true},{value:rec,label:'recovered (retry or fallback)'},{value:F.length-rec,label:'not recovered'}])}
+ ${F.length?tbl(['Endpoint','Method','Status','Error','Latency','Device','Recovered','Impact'],F.map(f=>[e(f.endpoint),e(f.method),`<span class="bad">${e(f.status)}</span>`,e(f.error),e(f.latency),e(f.device),f.recovered?'<span class="ok">Yes</span>':'<span class="bad">No</span>',pill(f.impact)])):'<div class="okline">&#10003; No failed requests during the success flow</div>'}</div></section>`},
+video:()=>`<section style="break-inside:avoid">${head('Recording','Success flow video')}<div class="card">${C.video.src?`<video controls src="${e(C.video.src)}"></video>`:`<div class="slot" style="width:120px">video slot</div>`}<div class="cap">${e(C.video.caption)} (video plays in HTML only; PDF shows this card)</div></div></section>`,
+signoff:()=>`<section style="break-inside:avoid">${head('Sign-off','Decision')}${kpis([{value:C.signoff.decision,label:'decision',hl:true},{value:C.signoff.qa,label:'QA'},{value:C.signoff.date,label:'date'}])}</section>`
+};
+const NAMES={overview:'Overview',scorecard:'Scorecard',uiperf:'UI performance',summary:'Summary',pixel:'Pixel grade',translations:'Translations',devices:'Device matrix',testcases:'Test cases',errorflows:'Error flows',failures:'Failures',performance:'Performance',api:'API latency',video:'Video',signoff:'Sign-off'};
+function render(){
+ document.getElementById('root').innerHTML=`<div class="cover"><div class="logo">APP<small>logo</small></div>
+ <div class="eyebrow">${e(C.eyebrow)}</div><h1>${e(C.title)}<span>${e(C.titleAccent)}</span></h1><p class="intro">${e(C.intro)}</p>
+ <div class="devs"><div>Figma <b>${e(O.figmaFrame)}</b></div>${D.map(d=>`<div>${e(d.name)} <b>${e(d.size)}</b></div>`).join('')}</div>
+ <div class="meta">${e(C.version)}</div></div>
+ <main>${Object.keys(B).filter(k=>S[k]).map(k=>B[k]()).join('')}</main>
+ <div class="foot"><span>QA Report · ${e(C.app)}</span><span>${e(O.jiraKey)}</span></div>`;}
+document.getElementById('toggles').innerHTML=Object.keys(B).map(k=>`<label><input type="checkbox" data-k="${k}" ${S[k]?'checked':''}> ${NAMES[k]}</label>`).join(' ');
+document.querySelectorAll('#toggles input').forEach(i=>i.onchange=()=>{S[i.dataset.k]=i.checked;localStorage.setItem(KEY,JSON.stringify(S));render();});
+render();
+</script>
+</body></html>
