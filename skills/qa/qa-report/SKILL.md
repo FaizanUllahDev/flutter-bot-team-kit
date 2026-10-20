@@ -1,6 +1,7 @@
 ---
 name: qa-report
 description: Fill templates/qa-report-template.html from qa.md (scorecard, failures only, devices array, section toggles, PDF button).
+summary: Fill the QA HTML report template
 ---
 # QA report
 1. Copy the template to `<AI-ROOT>/<App-Name>/qa/<JIRA-KEY>.html`.

@@ -19,3 +19,4 @@
 | 15 | Model routing | default / strong tier (Claude: inherit / opus, Cursor: auto / model name) | adapters |
 | 16 | Target tool | cursor / claude / both | install.sh |
 | 17 | Scope | global / project | install.sh |
+| 18 | Who handles git? | 1) I do git myself (default) / 2) Let bots run git (you confirm each commit/push; repo auth stays with you) | Git rule in AGENTS.md and team rules, flutter-dev + git-advisor text, `.claude/settings.json` denies (`install.sh --git=self\|bots`) |

@@ -2,6 +2,8 @@
 name: gap-finder
 description: Compares requirements, design and code; lists gaps and conflicts (stage Gap).
 tier: strong
+stage: Gap
+output: gap.md
 ---
 # gap-finder
 

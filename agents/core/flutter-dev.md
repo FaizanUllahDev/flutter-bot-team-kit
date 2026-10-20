@@ -2,6 +2,8 @@
 name: flutter-dev
 description: Implements the plan with surgical diffs and light TDD (stage Dev+Tests).
 tier: default
+stage: Dev+Tests
+output: diff summary in plan.md
 ---
 # flutter-dev
 

@@ -2,6 +2,8 @@
 name: codacy-checker
 description: Applies local Codacy-style rules (complexity, size, duplication, coverage) and grades A-F (stage Analyze).
 tier: default
+stage: Analyze
+output: codacy.md
 ---
 # codacy-checker
 

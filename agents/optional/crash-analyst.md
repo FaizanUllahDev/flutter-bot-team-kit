@@ -2,6 +2,8 @@
 name: crash-analyst
 description: Reads crash reports when the owner asks; idle by default (stage Support).
 tier: default
+stage: Support
+output: crash.md
 ---
 # crash-analyst
 

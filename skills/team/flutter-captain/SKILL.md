@@ -1,6 +1,7 @@
 ---
 name: flutter-captain
 description: Use for any Flutter/mobile engineering task (features, Jira tickets, BRS/Figma gap analysis, reviews, debugging). Runs the Flutter Captain orchestration protocol with always-on safety rules.
+summary: Orchestration protocol + safety rules
 ---
 # Flutter Captain
 Full files: this kit (AGENTS.md, agents/, skills/, contracts/).

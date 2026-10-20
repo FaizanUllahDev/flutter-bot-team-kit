@@ -2,6 +2,8 @@
 name: dev-planner
 description: Turns approved gaps into a small task plan with test points (stage Plan).
 tier: strong
+stage: Plan
+output: plan.md
 ---
 # dev-planner
 

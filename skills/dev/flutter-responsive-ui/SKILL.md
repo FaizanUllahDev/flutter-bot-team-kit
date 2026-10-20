@@ -6,6 +6,7 @@ description: >-
   reviewing screens, widgets, typography, padding, or layout under
   lib/ui/features or new common widgets; when user mentions ScaleHelper, ScreenUtil,
   sizer, responsiveness, or device scaling.
+summary: Scaled, overflow-safe UI
 ---
 
 # Flutter Responsive UI

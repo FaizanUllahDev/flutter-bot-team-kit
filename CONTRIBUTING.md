@@ -17,16 +17,17 @@ Thanks for helping. Keep changes small, generic and easy to review.
 ```bash
 bash -n install/install.sh
 bash install/install.sh --dry-run < /dev/null
+python3 scripts/update-readme.py --check   # README AUTO sections up to date
 rg -n $'\u2014' .      # em-dash check, must be empty
 ```
 If you change an example page or the QA template, re-render its PNG in `docs/images/` (headless Chrome, 2x, under 1 MB).
 
 ## Adding a bot
-- Add `agents/core/<name>.md` or `agents/optional/<name>.md` with `name`, `description`, `tier: default|strong` frontmatter (no tool-specific fields).
+- Add `agents/core/<name>.md` or `agents/optional/<name>.md` with `name`, `description`, `tier: default|strong`, `stage` and `output` frontmatter (no tool-specific fields).
 - Run `bash install/gen-adapters.sh` to refresh `.cursor/` and `.claude/` adapters.
 - Define input, output (a `contracts/` file) and stage.
-- Add a row to the Bots table in README.md.
+- The README Bots table and counts refresh from this frontmatter: run `python3 scripts/update-readme.py` locally, or let the workflow do it.
 
 ## Adding a skill
-- Add `skills/<group>/<name>/SKILL.md` with `name` and `description` frontmatter.
-- Add a row to the Skills table.
+- Add `skills/<group>/<name>/SKILL.md` with `name`, `description` and a one-line `summary` frontmatter.
+- The README Skills table refreshes from `summary`: run `python3 scripts/update-readme.py` locally, or let the workflow do it.

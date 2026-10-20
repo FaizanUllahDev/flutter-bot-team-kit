@@ -2,6 +2,8 @@
 name: firebase-analyst
 description: Reads analytics/config when the owner asks; idle by default (stage Support).
 tier: default
+stage: Support
+output: firebase.md
 ---
 # firebase-analyst
 

@@ -1,10 +1,18 @@
 #!/usr/bin/env bash
 # Flutter Bot Team Kit installer for Cursor and/or Claude Code.
 # No network, no git. Use --dry-run to preview (writes nothing).
+# Flags: --dry-run, --git=self|bots (skips the git question).
 set -euo pipefail
 KIT="$(cd "$(dirname "$0")/.." && pwd)"
 . "$KIT/install/lib.sh"
-DRY=0; [[ "${1:-}" == "--dry-run" ]] && DRY=1
+DRY=0; GIT_FLAG=""
+for a in "$@"; do
+  case "$a" in
+    --dry-run) DRY=1 ;;
+    --git=*) GIT_FLAG="${a#--git=}" ;;
+    *) echo "Unknown option: $a (use --dry-run, --git=self|bots)" >&2; exit 1 ;;
+  esac
+done
 ask(){ local q="$1" d="$2" a; read -r -p "$q [$d]: " a || true; echo "${a:-$d}"; }
 yn(){ local a; a=$(ask "$1 (y/n)" "$2"); [[ "$a" =~ ^[Yy] ]]; }
 mk(){ if [[ $DRY -eq 1 ]]; then echo "DRY: mkdir $1"; else mkdir -p "$1"; fi; }
@@ -25,6 +33,14 @@ STATE=$(ask "State management (GetX/Bloc/Riverpod)" "GetX")
 ARCH=$(ask "Architecture (clean/legacy/mixed)" "mixed")
 FVM=$(ask "Use fvm (yes/no)" "yes")
 TRACKER=$(ask "Tracker (Jira/Linear/none)" "Jira")
+if [[ -n "$GIT_FLAG" ]]; then GIT_MODE="$GIT_FLAG"; else
+  echo "Who handles git?" >&2
+  echo "  1) I do git myself (default, bots never commit/push/rebase/tag)" >&2
+  echo "  2) Let bots run git (you confirm each commit/push; repo auth such as SSH keys, tokens or GitHub login stays with you and is never asked for or stored)" >&2
+  GIT_MODE=$(ask "Git mode (1/2)" "1")
+fi
+case "$GIT_MODE" in 1|self) GIT_MODE=self ;; 2|bots) GIT_MODE=bots ;; *) echo "Unknown git mode: $GIT_MODE (use self or bots)" >&2; exit 1 ;; esac
+if [[ $DRY -eq 1 && "$GIT_MODE" == bots ]]; then echo "DRY: git mode bots: opt-in git rule in AGENTS.md / team.mdc / commands, git allowed after OK in flutter-dev + git-advisor, settings.json keeps git under ask (no commit/push deny)"; fi
 AIROOT=$(ask "AI-ROOT path" "$HOME/ai-root")
 CURSOR_STRONG=auto
 if [[ "$TARGET" != claude ]]; then CURSOR_STRONG=$(ask "Cursor model for strong-tier bots (auto or model name)" "auto"); fi
@@ -41,7 +57,7 @@ install_for(){ # <cursor|claude>
   local tool="$1" base
   if [[ "$SCOPE" == project ]]; then base="$REPO/.$tool"; else base="$HOME/.$tool"; fi
   mk "$base/agents"; mk "$base/skills"
-  for f in "${AGENT_FILES[@]}"; do emit_agent "$f" "$tool" "$CURSOR_STRONG" | write "$base/agents/$(basename "$f")"; done
+  for f in "${AGENT_FILES[@]}"; do emit_agent "$f" "$tool" "$CURSOR_STRONG" | git_agent "$(basename "$f" .md)" | write "$base/agents/$(basename "$f")"; done
   for d in "$KIT"/skills/*/*/; do
     local n; n=$(basename "$d"); skip_skill "$n" && continue
     mk "$base/skills/$n"
@@ -49,19 +65,20 @@ install_for(){ # <cursor|claude>
   done
   if [[ "$tool" == cursor ]]; then
     if [[ -n "$REPO" ]]; then mk "$REPO/.cursor/rules"
-      { emit_cursor_rule "$KIT/AGENTS.md"; echo; echo "Stack: $STATE, $ARCH. fvm: $FVM. Tracker: $TRACKER."; } | write "$REPO/.cursor/rules/team.mdc"
+      { emit_cursor_rule "$KIT/AGENTS.md"; echo; echo "Stack: $STATE, $ARCH. fvm: $FVM. Tracker: $TRACKER."; } | git_rules | write "$REPO/.cursor/rules/team.mdc"
     else echo "Note: Cursor rules are per project. Re-run with scope=project or copy .cursor/rules/team.mdc to your repo."; fi
   else
     mk "$base/commands"
-    for f in "$KIT"/.claude/commands/*.md; do write "$base/commands/$(basename "$f")" < "$f"; done
+    for f in "$KIT"/.claude/commands/*.md; do git_rules < "$f" | write "$base/commands/$(basename "$f")"; done
     if [[ -n "$REPO" ]]; then
-      { cat "$KIT/AGENTS.md"; echo; echo "Stack: $STATE, $ARCH. fvm: $FVM. Tracker: $TRACKER."; } | write "$REPO/AGENTS.md"
+      { cat "$KIT/AGENTS.md"; echo; echo "Stack: $STATE, $ARCH. fvm: $FVM. Tracker: $TRACKER."; } | git_rules | write "$REPO/AGENTS.md"
       if [[ -f "$REPO/CLAUDE.md" && $DRY -eq 0 ]]; then grep -q '@AGENTS.md' "$REPO/CLAUDE.md" || printf "\n@AGENTS.md\n" >> "$REPO/CLAUDE.md"
       else write "$REPO/CLAUDE.md" < "$KIT/CLAUDE.md"; fi
-      [[ -f "$REPO/.claude/settings.json" ]] || write "$REPO/.claude/settings.json" < "$KIT/.claude/settings.example.json"
+      [[ -f "$REPO/.claude/settings.json" ]] || git_settings < "$KIT/.claude/settings.example.json" | write "$REPO/.claude/settings.json"
     else
-      write "$base/team-AGENTS.md" < "$KIT/AGENTS.md"
+      git_rules < "$KIT/AGENTS.md" | write "$base/team-AGENTS.md"
       echo "Note: add '@~/.claude/team-AGENTS.md' to ~/.claude/CLAUDE.md, and merge .claude/settings.example.json into ~/.claude/settings.json."
+      if [[ "$GIT_MODE" == bots ]]; then echo "Note (git mode bots): when merging, drop the git commit/push/rebase/tag denies and keep Bash(git *) under ask."; fi
     fi
   fi
 }

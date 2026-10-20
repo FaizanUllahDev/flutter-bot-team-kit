@@ -2,6 +2,8 @@
 name: tracker-analyst
 description: Reads the ticket, comments, attachments and links (stage Intake).
 tier: default
+stage: Intake
+output: brief.md
 ---
 # tracker-analyst
 

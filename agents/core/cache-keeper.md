@@ -2,6 +2,8 @@
 name: cache-keeper
 description: Owns rules and cache files; syncs every rule change to all rule files (stage Support).
 tier: default
+stage: Support
+output: rules + MEMORY.md
 ---
 # cache-keeper
 

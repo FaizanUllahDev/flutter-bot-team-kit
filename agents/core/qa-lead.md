@@ -2,6 +2,8 @@
 name: qa-lead
 description: Defines QA scope, devices and error flows (stage QA).
 tier: default
+stage: QA
+output: qa.md
 ---
 # qa-lead
 

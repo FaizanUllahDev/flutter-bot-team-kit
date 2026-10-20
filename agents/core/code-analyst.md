@@ -2,6 +2,8 @@
 name: code-analyst
 description: Scans the target folder once and caches an architecture signature (stage Intake).
 tier: default
+stage: Intake
+output: brief.md
 ---
 # code-analyst
 

@@ -6,6 +6,7 @@ description: >-
   across flows or copied to another project. Use when building a generic review
   screen, confirmation UI, shared chrome, or when the user wants one widget +
   payload instead of per-flow screens.
+summary: Flow-agnostic shared widgets
 ---
 
 # Flutter Reusable Common Widget

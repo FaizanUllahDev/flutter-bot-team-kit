@@ -7,6 +7,7 @@ description: >-
   and maintain durable project memory across conversations. Use on every coding,
   review, planning, or follow-up task; when the user expects continuity across
   chats; or when they mention co-worker, memory, context, cases, or quality bar.
+summary: Co-worker habits and memory
 ---
 
 # Co-Worker Engineer

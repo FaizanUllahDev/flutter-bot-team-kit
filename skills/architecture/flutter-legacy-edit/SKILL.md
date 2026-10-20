@@ -5,6 +5,7 @@ description: >-
   architecture. Use when working under lib/**/controllers/, lib/ui/widgets/,
   fixing bugs in old domains, or when the user says preserve legacy / do not
   refactor architecture.
+summary: Safe edits in legacy code
 ---
 
 # Flutter Legacy Safe Edit

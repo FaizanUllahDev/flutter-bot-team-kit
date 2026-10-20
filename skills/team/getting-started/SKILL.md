@@ -4,6 +4,7 @@ description: >-
   First-run setup for a new owner of the Flutter bot team template: asks setup
   questions one at a time, saves answers, suggests connectors, then runs
   team-builder.
+summary: First-run setup for Grok Bot teams
 ---
 # Getting Started
 

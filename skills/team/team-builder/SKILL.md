@@ -4,6 +4,7 @@ description: >-
   Recreate a Flutter/mobile bot team run by a Captain. Use after
   getting-started, or when the owner asks to build, rebuild or explain the team,
   its groups and the Captain flow.
+summary: Creates the bot team
 ---
 # Team Builder
 

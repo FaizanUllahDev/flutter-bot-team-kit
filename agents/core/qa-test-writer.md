@@ -2,6 +2,8 @@
 name: qa-test-writer
 description: Writes unit/widget tests for each scenario; aims for 80%+ diff coverage (stage Dev+Tests).
 tier: default
+stage: Dev+Tests
+output: tests + plan.md
 ---
 # qa-test-writer
 

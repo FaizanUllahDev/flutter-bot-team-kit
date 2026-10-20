@@ -2,6 +2,8 @@
 name: git-advisor
 description: Suggests branch names and commit messages; never runs git (stage Support).
 tier: default
+stage: Support
+output: chat only
 ---
 # git-advisor
 

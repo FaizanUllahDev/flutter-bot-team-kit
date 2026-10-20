@@ -17,6 +17,14 @@
   <a href="https://github.com/FaizanUllahDev/flutter-bot-team-kit/releases"><img src="https://img.shields.io/github/v/release/FaizanUllahDev/flutter-bot-team-kit?style=flat-square" alt="Latest release"></a>
 </p>
 
+<p align="center">
+
+<!-- AUTO:VERSION:START -->
+Latest version: **1.0.0** (2026-10-20). See [CHANGELOG.md](CHANGELOG.md).
+<!-- AUTO:VERSION:END -->
+
+</p>
+
 ## Live preview
 
 | Page | Live | Source |
@@ -32,8 +40,8 @@
 </p>
 
 <p align="center">
-  <strong>9 stages &middot; 15 core bots + 7 optional &middot; 1 summary file per stage</strong><br>
-  <sub>Bots never commit, push or post. You stay in charge of git and your tracker.</sub>
+  <!-- AUTO:STATS:START --><strong>9 stages &middot; 15 core bots + 7 optional &middot; 1 summary file per stage</strong><br><!-- AUTO:STATS:END -->
+  <sub>By default bots never commit, push or post. You stay in charge of git and your tracker.</sub>
 </p>
 
 ---
@@ -77,7 +85,7 @@ AI agents write Flutter code fast. They also re-read the same docs, skip tests, 
 ## Features
 
 - **Gated pipeline:** one approval per stage, answer-only mode when you ask a question.
-- **Pick your bots:** 15 core bots, 7 optional ones you can turn on or off at install.
+- **Pick your bots:** <!-- AUTO:CORE_COUNT:START -->15<!-- AUTO:CORE_COUNT:END --> core bots, <!-- AUTO:OPTIONAL_COUNT:START -->7<!-- AUTO:OPTIONAL_COUNT:END --> optional ones you can turn on or off at install.
 - **Token saving:** summary-file handoff, signature reads, surgical diffs.
 - **Local quality rules:** Codacy-style complexity, size, duplication and coverage checks. No CLI, no network.
 - **Domain packs:** generic fintech and telecom best practices, plus a template.
@@ -164,30 +172,32 @@ Each stage writes one short file to `<AI-ROOT>/<App-Name>/tasks/<JIRA-KEY>/` and
 <details open>
 <summary><b>Bot table (role, stage, type, output)</b></summary>
 
+<!-- AUTO:BOTS:START -->
 | Bot | Stage | Type | Output | Role |
 |---|---|---|---|---|
 | captain | All | Required | `approvals.md` | Orchestrates the pipeline, routes work, stops at every approval gate |
 | brs-analyst | Intake | Required | `brief.md` | Reads the full BRS/requirements doc and distills rules into Where/Given/When/Then |
-| tracker-analyst | Intake | Required | `brief.md` | Reads the ticket, comments, attachments and links |
-| design-analyst | Intake | Required | `brief.md` | Reads the design file once and caches sizes, styles and states |
 | code-analyst | Intake | Required | `brief.md` | Scans the target folder once and caches an architecture signature |
+| design-analyst | Intake | Required | `brief.md` | Reads the design file once and caches sizes, styles and states |
+| tracker-analyst | Intake | Required | `brief.md` | Reads the ticket, comments, attachments and links |
 | gap-finder | Gap | Required | `gap.md` | Compares requirements, design and code; lists gaps and conflicts |
 | dev-planner | Plan | Required | `plan.md` | Turns approved gaps into a small task plan with test points |
 | flutter-dev | Dev+Tests | Required | `diff summary in plan.md` | Implements the plan with surgical diffs and light TDD |
 | qa-test-writer | Dev+Tests | Required | `tests + plan.md` | Writes unit/widget tests for each scenario; aims for 80%+ diff coverage |
-| pr-reviewer | Review | Required | `review.md` | Reviews the diff for quality, security, rebuilds, caching |
 | codacy-checker | Analyze | Required | `codacy.md` | Applies local Codacy-style rules (complexity, size, duplication, coverage) and grades A-F |
+| pr-reviewer | Review | Required | `review.md` | Reviews the diff for quality, security, rebuilds, caching |
 | qa-lead | QA | Required | `qa.md` | Defines QA scope, devices and error flows |
 | qa-reporter | Report | Required | `qa-report.html` | Fills the QA HTML report from qa.md |
 | tracker-updater | Tracker | Required | `approvals.md` | Posts approved updates to the tracker in one batch, only after owner OK |
 | cache-keeper | Support | Required | `rules + MEMORY.md` | Owns rules and cache files; syncs every rule change to all rule files |
-| security-checker | Review | Optional | `review.md` | Checks secrets, storage, logging and network safety |
-| localization-checker | Review | Optional | `qa.md` | Checks keys, missing translations, truncation and overflow |
-| git-advisor | Support | Optional | `chat only` | Suggests branch names and commit messages; never runs git |
-| crash-analyst | Support | Optional | `crash.md` | Reads crash reports when the owner asks; idle by default |
-| firebase-analyst | Support | Optional | `firebase.md` | Reads analytics/config when the owner asks; idle by default |
 | captain-b | All | Optional | `approvals.md` | Second captain for parallel tasks |
 | tracker-drafter | Plan | Optional | `plan.md` | Drafts subtasks and comments for owner approval |
+| localization-checker | Review | Optional | `qa.md` | Checks keys, missing translations, truncation and overflow |
+| security-checker | Review | Optional | `review.md` | Checks secrets, storage, logging and network safety |
+| crash-analyst | Support | Optional | `crash.md` | Reads crash reports when the owner asks; idle by default |
+| firebase-analyst | Support | Optional | `firebase.md` | Reads analytics/config when the owner asks; idle by default |
+| git-advisor | Support | Optional | `chat only` | Suggests branch names and commit messages; never runs git |
+<!-- AUTO:BOTS:END -->
 
 > [!NOTE]
 > Agent files are tool-neutral (`tier: default` or `tier: strong`). Adapters map tiers to models: Claude Code `inherit` / `opus`, Cursor `auto` / your chosen model.
@@ -195,19 +205,21 @@ Each stage writes one short file to `<AI-ROOT>/<App-Name>/tasks/<JIRA-KEY>/` and
 
 ## Skills
 
+<!-- AUTO:SKILLS:START -->
 | Group | Skill | Use |
 |---|---|---|
+| architecture | feature-module-standard | Single-nest feature layout |
 | architecture | flutter-clean-feature | New Clean features (data/domain/presentation) |
 | architecture | flutter-legacy-edit | Safe edits in legacy code |
-| architecture | feature-module-standard | Single-nest feature layout |
 | dev | flutter-responsive-ui | Scaled, overflow-safe UI |
 | dev | flutter-reusable-widget | Flow-agnostic shared widgets |
 | review | flutter-feature-review | Review checklist |
 | qa | qa-report | Fill the QA HTML report template |
-| team | flutter-captain | Orchestration protocol + safety rules |
 | team | coworker-engineer | Co-worker habits and memory |
+| team | flutter-captain | Orchestration protocol + safety rules |
 | team | getting-started | First-run setup for Grok Bot teams |
 | team | team-builder | Creates the bot team |
+<!-- AUTO:SKILLS:END -->
 
 ## Repo structure
 
@@ -220,6 +232,7 @@ flutter-bot-team-kit/
   .github/        ISSUE_TEMPLATE/  PULL_REQUEST_TEMPLATE.md
   .cursor/        rules/team.mdc  agents/        (generated adapter)
   .claude/        agents/  commands/  settings.example.json  (generated adapter)
+  scripts/        update-readme.py   (refreshes README AUTO sections)
   install/        INSTALL.md  setup-questions.md  install.sh  lib.sh  gen-adapters.sh
   agents/         core/*.md  optional/*.md   (tool-neutral source)
   skills/         architecture/  dev/  review/  qa/  team/
@@ -256,6 +269,8 @@ bash install/install.sh --dry-run   # preview, writes nothing
 bash install/install.sh             # target: cursor / claude / both, scope: global / project
 ```
 
+The installer also asks **Who handles git?** (you, the default, or bots after your OK per action). Skip the question with `--git=self` or `--git=bots`.
+
 <details open>
 <summary><b>Cursor</b></summary>
 
@@ -289,6 +304,7 @@ Manual steps, Grok Bot setup and adapter regeneration: [install/INSTALL.md](inst
 | Model per bot | `model:` in each agent file |
 | fvm on/off | installer question; analyzer gate adapts |
 | Tool target | installer: cursor / claude / both |
+| Git mode | installer question or `--git=self\|bots` |
 | Adapters | edit `agents/` or `AGENTS.md`, then `bash install/gen-adapters.sh` |
 </details>
 
@@ -299,7 +315,7 @@ Manual steps, Grok Bot setup and adapter regeneration: [install/INSTALL.md](inst
 
 - Never read or output secrets (.env, key files, keystores, service config, credentials).
 - Never edit `android/` or `ios/` without file-specific approval.
-- Bots never commit, push, rebase or tag. You do all git.
+- By default bots never commit, push, rebase or tag. You do all git. You can opt in per bot by editing its agent file (see FAQ); repo auth always stays with you.
 - No tracker posts or status changes without your approval.
 - Test accounts stay in one local file. Never in tracker, cloud, memory or reports. No PIN in screenshots.
 - No `print()`. Use the project logger.
@@ -309,7 +325,11 @@ Manual steps, Grok Bot setup and adapter regeneration: [install/INSTALL.md](inst
 <details>
 <summary><b>Do the bots touch git?</b></summary>
 
-No. Bots never commit, push, rebase or tag. You review the diff and do all git yourself.
+Not by default. Bots never commit, push, rebase or tag, and you do all git yourself.
+
+- **Opt in at install:** pick "Let bots run git" (or `bash install/install.sh --git=bots`). Only flutter-dev and git-advisor may then run git, after your OK for each action. Force-push, `reset --hard` and rewriting pushed history stay blocked.
+- **Opt in by hand:** edit an agent file (for example `agents/core/flutter-dev.md`), allow the git commands you want, then run `bash install/gen-adapters.sh`.
+- **Auth stays with you:** SSH keys, tokens and GitHub login are never asked for or stored.
 </details>
 
 <details>
@@ -319,9 +339,33 @@ Cursor and Claude Code, from one tool-neutral source. Grok Bot teams are support
 </details>
 
 <details>
+<summary><b>Do I need Jira?</b></summary>
+
+No. The installer asks for your tracker (Jira, Linear or none) and writes it into the team rules. Tracker bots only post after your OK, so with none you simply skip that stage.
+</details>
+
+<details>
+<summary><b>Can I preview the install first?</b></summary>
+
+Yes. `bash install/install.sh --dry-run` shows what would be written and writes nothing.
+</details>
+
+<details>
 <summary><b>Can I turn bots off?</b></summary>
 
-Yes. 15 core bots are required and 7 are optional. Pick them in the installer or edit `agents/optional/`.
+Yes. <!-- AUTO:CORE_COUNT:START -->15<!-- AUTO:CORE_COUNT:END --> core bots are required and <!-- AUTO:OPTIONAL_COUNT:START -->7<!-- AUTO:OPTIONAL_COUNT:END --> are optional. Pick them in the installer or edit `agents/optional/`.
+</details>
+
+<details>
+<summary><b>Will it follow my project's own rules?</b></summary>
+
+Yes. Your repo's own agents, skills and rules win, and you can add more in `project-overrides/<App-Name>.md`. The [Safety](#safety) rules always win over any override.
+</details>
+
+<details>
+<summary><b>How do I add a bot or a skill?</b></summary>
+
+Add the agent file (with `stage:` and `output:`) or the `SKILL.md` (with `summary:`). The bot and skill tables, counts and version in this README update automatically on push, or run `python3 scripts/update-readme.py` locally. See [CONTRIBUTING.md](CONTRIBUTING.md).
 </details>
 
 <details>

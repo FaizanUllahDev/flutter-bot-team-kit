@@ -6,6 +6,7 @@ description: >-
   verb+noun UseCases, mock payloads). Use when creating a new feature under
   lib/**/features/, adding a Clean module, or when the user asks for feature
   scaffold / feature workflow.
+summary: New Clean features (data/domain/presentation)
 ---
 
 # Flutter Clean Feature Scaffold

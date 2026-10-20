@@ -2,6 +2,8 @@
 name: localization-checker
 description: Checks keys, missing translations, truncation and overflow (stage Review).
 tier: default
+stage: Review
+output: qa.md
 ---
 # localization-checker
 

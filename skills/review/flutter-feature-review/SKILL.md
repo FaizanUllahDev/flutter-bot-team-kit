@@ -5,6 +5,7 @@ description: >-
   MVVM, legacy-safety, secrets/native boundaries, UI/themings, and test
   conventions. Use when reviewing a PR, feature diff, or after scaffolding a
   module.
+summary: Review checklist
 ---
 
 # Flutter Feature / Diff Review

@@ -7,7 +7,9 @@ The kit has one tool-neutral source (`agents/`, `skills/`, `AGENTS.md`) and two 
 bash install/install.sh --dry-run   # preview, writes nothing
 bash install/install.sh
 ```
-It asks: target (cursor / claude / both), scope (global / project), owner, app, domain, stack, fvm, tracker, AI-ROOT, Cursor strong model, and each optional bot.
+It asks: target (cursor / claude / both), scope (global / project), owner, app, domain, stack, fvm, tracker, who handles git, AI-ROOT, Cursor strong model, and each optional bot.
+
+Git mode: `--git=self` (default, bots never commit, push, rebase or tag) or `--git=bots` (only flutter-dev and git-advisor may run git, after your OK per action; no force-push, `reset --hard` or history rewrites; `.claude/settings.json` keeps `git *` under ask). Repo auth (SSH keys, tokens, GitHub login) always stays with you. The repo source stays in `self` mode; only installed files change.
 
 | Target + scope | Writes to |
 |---|---|

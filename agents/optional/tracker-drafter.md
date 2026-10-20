@@ -2,6 +2,8 @@
 name: tracker-drafter
 description: Drafts subtasks and comments for owner approval (stage Plan).
 tier: default
+stage: Plan
+output: plan.md
 ---
 # tracker-drafter
 

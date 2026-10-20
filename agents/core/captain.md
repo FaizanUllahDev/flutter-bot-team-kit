@@ -2,6 +2,8 @@
 name: captain
 description: Orchestrates the pipeline, routes work, stops at every approval gate (stage All).
 tier: default
+stage: All
+output: approvals.md
 ---
 # captain
 

@@ -2,6 +2,8 @@
 name: design-analyst
 description: Reads the design file once and caches sizes, styles and states (stage Intake).
 tier: default
+stage: Intake
+output: brief.md
 ---
 # design-analyst
 

@@ -2,6 +2,8 @@
 name: brs-analyst
 description: Reads the full BRS/requirements doc and distills rules into Where/Given/When/Then (stage Intake).
 tier: default
+stage: Intake
+output: brief.md
 ---
 # brs-analyst
 

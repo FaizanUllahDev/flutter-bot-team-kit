@@ -4,6 +4,7 @@ description: >-
   Standard single-nest feature layout (one data/domain/presentation per feature,
   one binding registered at app start, *_view screens, file-prefix modules).
   Use with flutter-clean-feature when building or reshaping a feature folder.
+summary: Single-nest feature layout
 ---
 
 # Feature module standard

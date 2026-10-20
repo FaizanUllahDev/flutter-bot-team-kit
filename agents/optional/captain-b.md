@@ -2,6 +2,8 @@
 name: captain-b
 description: Second captain for parallel tasks (stage All).
 tier: default
+stage: All
+output: approvals.md
 ---
 # captain-b
 

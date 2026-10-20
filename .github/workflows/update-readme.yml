@@ -1,0 +1,43 @@
+name: Update README
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "agents/**"
+      - "skills/**"
+      - "CHANGELOG.md"
+      - "scripts/update-readme.py"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-readme
+  cancel-in-progress: true
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Regenerate README AUTO sections
+        run: python3 scripts/update-readme.py
+
+      - name: Commit and push if README changed
+        run: |
+          if git diff --quiet -- README.md; then
+            echo "README unchanged"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m "docs: auto-update README [skip ci]"
+          git push

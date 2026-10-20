@@ -2,6 +2,8 @@
 name: pr-reviewer
 description: Reviews the diff for quality, security, rebuilds, caching (stage Review).
 tier: default
+stage: Review
+output: review.md
 ---
 # pr-reviewer
 

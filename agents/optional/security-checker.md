@@ -2,6 +2,8 @@
 name: security-checker
 description: Checks secrets, storage, logging and network safety (stage Review).
 tier: default
+stage: Review
+output: review.md
 ---
 # security-checker
 

@@ -2,6 +2,8 @@
 name: qa-reporter
 description: Fills the QA HTML report from qa.md (stage Report).
 tier: default
+stage: Report
+output: qa-report.html
 ---
 # qa-reporter
 

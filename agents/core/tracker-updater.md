@@ -2,6 +2,8 @@
 name: tracker-updater
 description: Posts approved updates to the tracker in one batch, only after owner OK (stage Tracker).
 tier: default
+stage: Tracker
+output: approvals.md
 ---
 # tracker-updater
 
