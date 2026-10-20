@@ -1,7 +1,8 @@
 <h1 align="center">Flutter Bot Team Kit</h1>
 
 <p align="center">
-  <em>A gated AI bot team for Flutter apps. From requirements to QA report, with you approving every step.</em>
+  <em>A gated AI bot team for Flutter apps. From requirements to QA report, with you approving every step.</em><br>
+  <sub>For Flutter teams that use Cursor or Claude Code and want AI agents that follow their architecture, write tests and never touch git.</sub>
 </p>
 
 <p align="center">
@@ -10,26 +11,21 @@
   <img src="https://img.shields.io/badge/PRs-welcome-ffd100?style=flat-square" alt="PRs welcome">
   <img src="https://img.shields.io/badge/works%20with-Cursor%20%2B%20Claude%20Code-111111?style=flat-square" alt="Works with Cursor and Claude Code">
   <img src="https://img.shields.io/badge/made%20for-AI%20agents-7b4fc9?style=flat-square" alt="Made for AI agents">
+  <br>
+  <a href="https://github.com/FaizanUllahDev/flutter-bot-team-kit/stargazers"><img src="https://img.shields.io/github/stars/FaizanUllahDev/flutter-bot-team-kit?style=flat-square" alt="GitHub stars"></a>
+  <a href="https://github.com/FaizanUllahDev/flutter-bot-team-kit/commits/main"><img src="https://img.shields.io/github/last-commit/FaizanUllahDev/flutter-bot-team-kit?style=flat-square" alt="Last commit"></a>
+  <a href="https://github.com/FaizanUllahDev/flutter-bot-team-kit/releases"><img src="https://img.shields.io/github/v/release/FaizanUllahDev/flutter-bot-team-kit?style=flat-square" alt="Latest release"></a>
 </p>
 
-<h3 align="center">Live preview</h3>
+## Live preview
 
-<p align="center">
-  <a href="https://faizanullahdev.github.io/flutter-bot-team-kit/"><b>Landing page</b></a> &middot;
-  <a href="https://faizanullahdev.github.io/flutter-bot-team-kit/examples/bots_working_simple.html"><b>How the bots work (simple)</b></a> &middot;
-  <a href="https://faizanullahdev.github.io/flutter-bot-team-kit/examples/bots_working.html"><b>How the bots work (detailed)</b></a> &middot;
-  <a href="https://faizanullahdev.github.io/flutter-bot-team-kit/templates/qa-report-template.html"><b>QA report template</b></a>
-</p>
-
-| Page | GitHub Pages (live) | Fallback preview | Source |
-|---|---|---|---|
-| Simple explainer | [open](https://faizanullahdev.github.io/flutter-bot-team-kit/examples/bots_working_simple.html) | [htmlpreview](https://htmlpreview.github.io/?https://github.com/FaizanUllahDev/flutter-bot-team-kit/blob/main/examples/bots_working_simple.html) | [examples/bots_working_simple.html](examples/bots_working_simple.html) |
-| Detailed explainer | [open](https://faizanullahdev.github.io/flutter-bot-team-kit/examples/bots_working.html) | [htmlpreview](https://htmlpreview.github.io/?https://github.com/FaizanUllahDev/flutter-bot-team-kit/blob/main/examples/bots_working.html) | [examples/bots_working.html](examples/bots_working.html) |
-| QA report template | [open](https://faizanullahdev.github.io/flutter-bot-team-kit/templates/qa-report-template.html) | [htmlpreview](https://htmlpreview.github.io/?https://github.com/FaizanUllahDev/flutter-bot-team-kit/blob/main/templates/qa-report-template.html) | [templates/qa-report-template.html](templates/qa-report-template.html) |
-| Repo structure | [open](https://faizanullahdev.github.io/flutter-bot-team-kit/examples/structure.html) | [htmlpreview](https://htmlpreview.github.io/?https://github.com/FaizanUllahDev/flutter-bot-team-kit/blob/main/examples/structure.html) | [examples/structure.html](examples/structure.html) |
-
-> [!NOTE]
-> Live links need GitHub Pages: **Settings > Pages > Deploy from a branch > `main` / `(root)`**. The root `index.html` is the landing page; `docs/index.html` is a mirror.
+| Page | Live | Source |
+|---|---|---|
+| Landing page | [open](https://faizanullahdev.github.io/flutter-bot-team-kit/) | [index.html](index.html) |
+| Simple explainer | [open](https://faizanullahdev.github.io/flutter-bot-team-kit/examples/bots_working_simple.html) | [examples/bots_working_simple.html](examples/bots_working_simple.html) |
+| Detailed explainer | [open](https://faizanullahdev.github.io/flutter-bot-team-kit/examples/bots_working.html) | [examples/bots_working.html](examples/bots_working.html) |
+| QA report template | [open](https://faizanullahdev.github.io/flutter-bot-team-kit/templates/qa-report-template.html) | [templates/qa-report-template.html](templates/qa-report-template.html) |
+| Repo structure | [open](https://faizanullahdev.github.io/flutter-bot-team-kit/examples/structure.html) | [examples/structure.html](examples/structure.html) |
 
 <p align="center">
   <a href="examples/bots_working_simple.html"><img src="docs/media/bots-working-simple.gif" width="880" alt="How the bot team works: intake, gap, plan, build, review, QA and report, with an owner approval gate after each stage"></a>
@@ -53,6 +49,7 @@ AI agents write Flutter code fast. They also re-read the same docs, skip tests, 
 - [Why](#why)
 - [Features](#features)
 - [How it works](#how-it-works)
+- [What a run looks like](#what-a-run-looks-like)
 - [Preview gallery](#preview-gallery)
 - [Bots](#bots)
 - [Skills](#skills)
@@ -61,6 +58,7 @@ AI agents write Flutter code fast. They also re-read the same docs, skip tests, 
 - [Quick start](#quick-start)
 - [Configuration](#configuration)
 - [Safety](#safety)
+- [FAQ](#faq)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
 - [License](#license)
@@ -109,14 +107,25 @@ flowchart LR
 8. **Report** fills the HTML QA report.
 9. **Tracker** posts one batch update, only after your OK.
 
+## What a run looks like
+
+Each stage writes one short file to `<AI-ROOT>/<App-Name>/tasks/<JIRA-KEY>/` and stops for your OK.
+
+| Stage | File | What you review |
+|---|---|---|
+| Intake | `brief.md` | Rules, ticket details, design sizes and code signature in one place |
+| Gap | `gap.md` | Conflicts between requirements, design and code, with options |
+| Plan | `plan.md` | Small tasks with test points |
+| Dev + Tests | diff + tests | Surgical code changes and scenario tests |
+| Analyze | `codacy.md` | Local quality grade A-F |
+| Review | `review.md` | Quality, security and performance findings |
+| QA | `qa.md` | Device, pixel, translation and error-flow results |
+| Report | `qa-report.html` | Scored HTML QA report |
+| Tracker | `approvals.md` | One batch update, posted only after your OK |
+
 ## Preview gallery
 
-> [!TIP]
-> GitHub cannot render these pages inline. Click any image for the HTML source, then open it locally in a browser or use the [Live preview](#live-preview) links.
-
 ### How the bots work (simple)
-
-<p align="center"><a href="examples/bots_working_simple.html"><img src="docs/media/bots-working-simple.gif" width="800" alt="How the bots work (simple) scroll-through"></a><br><sub><a href="docs/media/bots-working-simple.mp4">MP4 version</a></sub></p>
 
 <table>
   <tr>
@@ -134,8 +143,6 @@ flowchart LR
 
 ### How the bots work (detailed)
 
-<p align="center"><a href="examples/bots_working.html"><img src="docs/media/bots-working.gif" width="800" alt="How the bots work (detailed) scroll-through"></a><br><sub><a href="docs/media/bots-working.mp4">MP4 version</a></sub></p>
-
 <table>
   <tr>
     <td align="center" width="50%"><a href="examples/bots_working.html"><img src="docs/images/sections/explainer-map.png" width="420" alt="Pipeline map"></a><br><sub>Pipeline map</sub></td>
@@ -151,33 +158,6 @@ flowchart LR
 </table>
 
 </details>
-
-### QA report template
-
-<p align="center"><a href="templates/qa-report-template.html"><img src="docs/media/qa-report-template.gif" width="800" alt="QA report template scroll-through"></a><br><sub><a href="docs/media/qa-report-template.mp4">MP4 version</a></sub></p>
-
-<table>
-  <tr>
-    <td align="center" width="50%"><a href="templates/qa-report-template.html"><img src="docs/images/sections/qa-cover.png" width="420" alt="Cover"></a><br><sub>Cover</sub></td>
-    <td align="center" width="50%"><a href="templates/qa-report-template.html"><img src="docs/images/sections/qa-scorecard.png" width="420" alt="Executive scorecard (A-F grades)"></a><br><sub>Executive scorecard (A-F grades)</sub></td>
-  </tr>
-  <tr>
-    <td align="center" width="50%"><a href="templates/qa-report-template.html"><img src="docs/images/sections/qa-pixel-test.png" width="420" alt="Pixel test vs design"></a><br><sub>Pixel test vs design</sub></td>
-    <td align="center" width="50%"><a href="templates/qa-report-template.html"><img src="docs/images/sections/qa-ui-performance.png" width="420" alt="UI performance by screen"></a><br><sub>UI performance by screen</sub></td>
-  </tr>
-  <tr>
-    <td align="center" width="50%"><a href="templates/qa-report-template.html"><img src="docs/images/sections/qa-performance.png" width="420" alt="Quality score per device"></a><br><sub>Quality score per device</sub></td>
-    <td align="center" width="50%"><a href="templates/qa-report-template.html"><img src="docs/images/sections/qa-api-latency.png" width="420" alt="API latency and failed requests"></a><br><sub>API latency and failed requests</sub></td>
-  </tr>
-  <tr>
-    <td align="center" width="50%"><a href="templates/qa-report-template.html"><img src="docs/images/sections/qa-translations.png" width="420" alt="Translations (failures only)"></a><br><sub>Translations (failures only)</sub></td>
-    <td align="center" width="50%"><a href="templates/qa-report-template.html"><img src="docs/images/sections/qa-error-flows.png" width="420" alt="Error flows"></a><br><sub>Error flows</sub></td>
-  </tr>
-</table>
-
-### Repository structure
-
-<p align="center"><a href="examples/structure.html"><img src="docs/images/sections/kit-structure.png" width="800" alt="Repository structure"></a></p>
 
 ## Bots
 
@@ -249,7 +229,7 @@ flutter-bot-team-kit/
   project-overrides/README.md
   examples/       bots_working.html  bots_working_simple.html  structure.html
   index.html  .nojekyll   (GitHub Pages landing)
-  docs/           index.html  images/sections/  media/ (GIF + MP4)
+  docs/           images/sections/  media/
 ```
 </details>
 
@@ -324,6 +304,32 @@ Manual steps, Grok Bot setup and adapter regeneration: [install/INSTALL.md](inst
 - Test accounts stay in one local file. Never in tracker, cloud, memory or reports. No PIN in screenshots.
 - No `print()`. Use the project logger.
 
+## FAQ
+
+<details>
+<summary><b>Do the bots touch git?</b></summary>
+
+No. Bots never commit, push, rebase or tag. You review the diff and do all git yourself.
+</details>
+
+<details>
+<summary><b>Which AI tools does it work with?</b></summary>
+
+Cursor and Claude Code, from one tool-neutral source. Grok Bot teams are supported through the `getting-started` and `team-builder` skills.
+</details>
+
+<details>
+<summary><b>Can I turn bots off?</b></summary>
+
+Yes. 15 core bots are required and 7 are optional. Pick them in the installer or edit `agents/optional/`.
+</details>
+
+<details>
+<summary><b>Does it send my code anywhere?</b></summary>
+
+The kit itself adds no network calls. Quality checks run locally with no CLI or upload. Your AI tool's own data policy still applies.
+</details>
+
 ## Roadmap
 
 - [ ] More domain packs (e-commerce, health)
@@ -343,9 +349,8 @@ PRs welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) and the [Code of Conduct](C
 ## Acknowledgements
 
 - Created by [Faizan Ullah](https://github.com/FaizanUllahDev)
-- [Claude Code](https://code.claude.com/docs) subagents, skills and slash commands
-
 - [Flutter](https://flutter.dev) and its community
 - [Cursor](https://cursor.com) subagents and skills
+- [Claude Code](https://code.claude.com/docs) subagents, skills and slash commands
 - [Contributor Covenant](https://www.contributor-covenant.org)
 - [shields.io](https://shields.io) for badges
