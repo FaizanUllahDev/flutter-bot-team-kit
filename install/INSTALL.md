@@ -4,6 +4,8 @@ The kit has one tool-neutral source (`agents/`, `skills/`, `AGENTS.md`, `.claude
 
 ## Option A: installer (recommended)
 ```bash
+bash install/setup-questions.md
+bash install/lib.sh
 bash install/install.sh --dry-run   # preview, writes nothing
 bash install/install.sh
 bash install/install.sh --target=codex,gemini,copilot --git=self   # skip those two questions
